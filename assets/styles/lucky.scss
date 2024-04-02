@@ -1,0 +1,13 @@
+.diamond-main {
+    background: url('../images/diamondsmine.png');
+    background-size: cover;
+    padding: 1rem 0;
+}
+.diamond-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px
+}
+.diamond-img  {
+    width: 20%;
+}

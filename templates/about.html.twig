@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <h1>About</h1>
+        <div class="container">
+           <div class = "text">
+           <h3>Om kursen</h3>
+           <p>Model-View-Controller (MVC) är vårt eget smeknamn på kursen och under det namnet döljer sig objektorienterad
+            PHP-programmering med kända webbramverk, enhetstestning, kodkvalitet och databaskopplingar med objekt relational mapping (ORM).
+            Kursen består av 6 kursmoment som skall utföras och lämnas in samt ett avslutande kmom07/10 som examinerar kursen. Kursmomenten är 
+            delvis gulmarkerade då de kommer att gås igenom och släppas löpande under kursens gång.
+           </p>
+           <h3>Kursens syfte</h3>
+           <p>Kursens fokus är objektorienterade programmeringstekniker i programmeringsspråket PHP. Klassiska objektorienterade
+            konstruktioner hanteras tillsammans med objektorienterad programmering i webbaserat ramverk tillsammans med
+            databaser samt enhetstestning</p>
+            <img src="{{ asset('img/mvc.png') }}" alt="">
+           </div>
+            <aside class="aside">
+                <p>Kursens <strong><a href="https://github.com/dbwebb-se/mvc">Git repo</a></strong> här!</p>
+                <p>Och mitt <a href="https://github.com/SandyN19/mvc-v2"><strong>git repo</strong></a> här!</p>
+            </aside>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Home</h1>
+    <h2>Oh no! A fox stole diamonds from your inventory!!</h2>
+        <a href="{{ asset('img/fox.png') }}">
+            <img class ="fox" src="{{ asset('img/fox.png') }}" alt="">
+        </a>
+  
+        <p>A fox is a passive mob that spawns in taigas, old growth taigas, snowy taigas and mountain groves.
+        They are able to carry a single item in their mouth, but prefer food over other items.
+        Read more about minecraft foxes <a href = "https://minecraft.fandom.com/wiki/Fox">here</a></p> 
+{% endblock %}
