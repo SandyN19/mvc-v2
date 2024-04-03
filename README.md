@@ -17,4 +17,4 @@ Github har en bra guide på hur man klonar en repository!
 7. Press Enter to create your local clone.
 
 ## Hur man kommer igång med webbplatsen
-Skriv `php -S localhost:8888 -t public` i terminalen
+Skriv `php -S localhost:8888 -t public` i terminalen.
