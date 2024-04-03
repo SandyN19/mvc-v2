@@ -13,7 +13,6 @@ class IndexControllerTwig extends AbstractController
     {
         return $this->render('home.html.twig');
     }
-    
 
     #[Route("/about", name: "about")]
     public function about(): Response
