@@ -38,7 +38,7 @@ class LuckyControllerJson
         "No pressure, no diamonds.",
         "Don’t tell people your plans. Show them your results.");
 
-        $number = random_int(0, count($quotes) -1);
+        $number = random_int(0, count($quotes) - 1);
         $quote = $quotes[$number];
 
         $data = [
