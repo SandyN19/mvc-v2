@@ -1,0 +1,15 @@
+.button-delete-session {
+    padding: 10px 20px;
+    background-color: #515151;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin: 10px 0;
+}
+
+.button-delete-session:hover {
+    background-color: red;
+}
