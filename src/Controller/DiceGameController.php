@@ -115,12 +115,7 @@ class DiceGameController extends AbstractController
     {
         $dicehand = $session->get("pig_dicehand");
 
-        $data = [
-            "pigDices" => $session->get("pig_dices"),
-            "pigRound" => $session->get("pig_round"),
-            "pigTotal" => $session->get("pig_total"),
-            "diceValues" => $dicehand->getString() 
-        ];
+        
 
         return $this->render('pig/play.html.twig', $data);
     }

@@ -13,3 +13,29 @@
 .button-delete-session:hover {
     background-color: red;
 }
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(4, auto); 
+    grid-gap: 10px;
+
+}
+.card {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+@media (max-width: 800px) {
+    .card-container {
+        grid-template-columns: repeat(13, 1fr);
+        grid-template-rows: repeat(4, auto);
+        grid-gap: 3px;
+    }
+    .card {
+        padding: 5px; 
+        font-size: 0.8em;
+    }
+}
