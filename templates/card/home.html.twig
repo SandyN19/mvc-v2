@@ -3,9 +3,14 @@
 {% block title %}Cards{% endblock %}
 
 {% block body %}
-<div class= "card">
+
 <h1>Card game</h1>
+    <div class= "nav" style = "background-color: transparent;">
+        <ul style ="">
+            <li><a href="{{ path('card_deck') }}">Deck</a></li>
+            <li><a href="{{ path('card_shuffle') }}">Shuffled deck</a></li>
+            <li><a href="{{ path('card_draw') }}">Draw a card</a></li>
+        </ul>
+    </div>
 
-
-</div>
 {% endblock %}
