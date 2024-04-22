@@ -23,6 +23,15 @@ class DeckOfCards {
     }
 
     public function display($numOfCards): array {
-        return array_splice($this->cards, 0, $numOfCards);
+        for ($i = 0; $i <= $numOfCards; $i++) {
+            return $this->cards;
+        }
+    }
+    public function drawCard() {
+        return array_shift($this->cards);
+    }
+
+    public function getCards(): array {
+        return $this->cards;
     }
 }

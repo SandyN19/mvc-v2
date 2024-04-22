@@ -1,24 +1,13 @@
 <?php
 namespace App\Card;
 
-class CardGraphic extends Card
-{
-    private $representation = [
-        '⚀',
-        '⚁',
-        '⚂',
-        '⚃',
-        '⚄',
-        '⚅',
-    ];
-
-    public function __construct()
-    {
-        parent::__construct();
+class CardGraphic extends Card {
+    private $representation = '🂠'; 
+    public function __construct($suit = null, $rank = null) {
+        parent::__construct($suit, $rank);
     }
 
-    public function getAsString(): string
-    {
-        return $this->representation[$this->value - 1];
+    public function display(): string {
+        return $this->representation;
     }
 }

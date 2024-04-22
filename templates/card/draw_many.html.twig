@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Pig Game{% endblock %}
+
+{% block body %}
+<h1>Deck of cards</h1>
+<p>Draw</p>
+    <div class="card">
+    {% if card %}
+            {% for c in card %}
+                {{ c }}
+            {% endfor %}
+    {% endif %}
+    </div>
+    <p>Cards Remaining: {{ length }}</p>
+    <form method="post" action="">
+    <p>
+        <input type="submit" name="draw" value="Draw another card"
+    onClick="this.form.action='{{ path('draw_a_card') }}';">
+    </p>
+</form>
+{% endblock %}
