@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Dice\Dice;
 use App\Dice\DiceGraphic;
 use App\Dice\DiceHand;
@@ -18,7 +19,7 @@ class DiceGameController extends AbstractController
     {
         return $this->render('pig/home.html.twig');
     }
-    
+
     #[Route("/game/pig/test/roll", name: "test_roll_dice")]
     public function testRollDice(): Response
     {
@@ -90,8 +91,7 @@ class DiceGameController extends AbstractController
     public function initCallback(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $numDice = $request->request->get('num_dices');
 
         $hand = new DiceHand();
@@ -111,11 +111,10 @@ class DiceGameController extends AbstractController
     #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
     public function play(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $dicehand = $session->get("pig_dicehand");
 
-        
+
 
         return $this->render('pig/play.html.twig', $data);
     }
@@ -123,8 +122,7 @@ class DiceGameController extends AbstractController
     #[Route("/game/pig/roll", name: "pig_roll", methods: ['POST'])]
     public function roll(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $hand = $session->get("pig_dicehand");
         $hand->roll();
 
@@ -145,15 +143,14 @@ class DiceGameController extends AbstractController
         }
 
         $session->set("pig_round", $roundTotal + $round);
-        
+
         return $this->redirectToRoute('pig_play');
     }
     //Save
     #[Route("/game/pig/save", name: "pig_save", methods: ['POST'])]
     public function save(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $this->addFlash(
             'notice',
             'Your round was saved to the total!'
@@ -166,5 +163,5 @@ class DiceGameController extends AbstractController
 
         return $this->redirectToRoute('pig_play');
     }
-    
+
 }

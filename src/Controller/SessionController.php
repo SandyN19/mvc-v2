@@ -31,5 +31,5 @@ class SessionController extends AbstractController
         ];
         return $this->redirectToRoute('session_start', $data);
     }
-    
+
 }

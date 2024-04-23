@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\CardHand;
@@ -38,7 +39,7 @@ class CardController extends AbstractController
     {
         $deck = new DeckOfCards();
         $deck->shuffle();
-        
+
 
         $data = [
             "hand" => $deck->display(52),
@@ -52,8 +53,7 @@ class CardController extends AbstractController
     public function cardDraw(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if ($session->has('deck')) {
             $deck = ($session->get('deck'));
         } else {
@@ -65,7 +65,7 @@ class CardController extends AbstractController
 
         $data = [
             "card" => $lastCard,
-            "length" =>count($deck->getCards()),
+            "length" => count($deck->getCards()),
         ];
 
         return $this->render('card/draw.html.twig', $data);
@@ -75,18 +75,17 @@ class CardController extends AbstractController
     public function drawACard(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
-            $deck = ($session->get('deck'));
-            $cardHand = new CardHand();
-            $cardHand->drawCard($deck);
-            $session->set('deck', ($deck));
-            $lastCard = $cardHand->getLastDrawnCard()->getAsString();
-            $session->set('last_card', $lastCard);
+    ): Response {
+        $deck = ($session->get('deck'));
+        $cardHand = new CardHand();
+        $cardHand->drawCard($deck);
+        $session->set('deck', ($deck));
+        $lastCard = $cardHand->getLastDrawnCard()->getAsString();
+        $session->set('last_card', $lastCard);
 
 
-            return $this->redirectToRoute('card_draw');
-    } 
+        return $this->redirectToRoute('card_draw');
+    }
 
 
     #[Route("card/deck/draw/{num<\d+>}", name: "card_draw_num")]
@@ -94,11 +93,10 @@ class CardController extends AbstractController
         int $num,
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if ($num > 52) {
             throw new \Exception("Can not draw more than 52 cards!");
-        
+
         }
         if ($session->has('deck')) {
             $deck = ($session->get('deck'));
@@ -111,7 +109,7 @@ class CardController extends AbstractController
         $cardHand = new CardHand();
         $cardsDrawn = [];
 
-        
+
         for ($i = 1; $i <= $num; $i++) {
             $cardHand->drawCard($deck);
         }
@@ -123,7 +121,7 @@ class CardController extends AbstractController
         $session->set('deck', ($deck));
         $lastCard = end($cardsDrawn);
         $session->set('last_card', $lastCard);
-    
+
         $data = [
             "card" => $cardsDrawn,
             "length" => count($deck->getCards()),

@@ -2,11 +2,13 @@
 
 namespace App\Card;
 
-class Card {
+class Card
+{
     public $suit;
     public $rank;
 
-    public function __construct($suit, $rank) {
+    public function __construct($suit, $rank)
+    {
         $this->suit = $suit;
         $this->rank = $rank;
     }
