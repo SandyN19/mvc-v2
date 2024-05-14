@@ -22,7 +22,7 @@ class CardControllerJson
         $cardsLeft = count($deck->getCards());
 
         $data = [
-            "hand" => $deck->display($cardsLeft), 
+            "hand" => $deck->display($cardsLeft),
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
@@ -54,7 +54,7 @@ class CardControllerJson
         SessionInterface $session
     ): Response {
         $deck = ($session->get('deck'));
-        
+
         $cardHand = new CardHand();
         $cardHand->drawCard($deck);
 

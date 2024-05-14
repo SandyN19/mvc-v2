@@ -30,13 +30,13 @@ class CardController extends AbstractController
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
         }
-    
+
         $cardsLeft = count($deck->getCards());
-    
+
         $data = [
-            "hand" => $deck->display($cardsLeft), 
+            "hand" => $deck->display($cardsLeft),
         ];
-    
+
         return $this->render('card/deck.html.twig', $data);
     }
 
@@ -50,7 +50,7 @@ class CardController extends AbstractController
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-        
+
         $cardsLeft = count($deck->getCards());
 
 
