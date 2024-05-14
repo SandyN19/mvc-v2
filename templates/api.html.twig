@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API{% endblock %}
+
+{% block body %}
+    <h1>Deck API</h1>
+    <ul>
+        <li><a href="{{ path('api/deck') }}">Deck API</a></li>
+        <li><a href="{{ path('api/deck/shuffle') }}">Shuffle Deck API</a></li>
+        <li><a href="{{ path('api/deck/draw') }}">Draw a Card API</a></li>
+        <li><a href="{{ path('api/deck/draw/{num<\\d+>}', {'num': 5}) }}">Draw 5 Cards API</a></li>
+    </ul>
+{% endblock %}

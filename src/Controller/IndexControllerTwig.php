@@ -29,4 +29,9 @@ class IndexControllerTwig extends AbstractController
     {
         return $this->render('lucky.html.twig');
     }
+    #[Route("/api", name: "api")]
+    public function api(): Response
+    {
+        return $this->render('api.html.twig');
+    }
 }

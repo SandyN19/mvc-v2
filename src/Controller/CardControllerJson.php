@@ -15,12 +15,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CardControllerJson
 {
     #[Route("/api/deck", name: "api/deck")]
-    public function apiDeck(): Response
+    public function apiDeck(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards();
+        $deck = $session->get('deck');
+
+        $cardsLeft = count($deck->getCards());
 
         $data = [
-            "hand" => $deck->display(52),
+            "hand" => $deck->display($cardsLeft), 
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
@@ -30,13 +32,15 @@ class CardControllerJson
     }
 
     #[Route("/api/deck/shuffle", name: "api/deck/shuffle")]
-    public function apiDecShuffle(): Response
+    public function apiDecShuffle(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards();
+        $deck = $session->get('deck');
         $deck->shuffle();
 
+        $cardsLeft = count($deck->getCards());
+
         $data = [
-            "hand" => $deck->display(52),
+            "hand" => $deck->display($cardsLeft),
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
@@ -49,13 +53,8 @@ class CardControllerJson
     public function apiDraw(
         SessionInterface $session
     ): Response {
-        if ($session->has('deck')) {
-            $deck = ($session->get('deck'));
-        } else {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-            $session->set('deck', $deck);
-        }
+        $deck = ($session->get('deck'));
+        
         $cardHand = new CardHand();
         $cardHand->drawCard($deck);
 
@@ -81,13 +80,8 @@ class CardControllerJson
             throw new \Exception("Can not draw more than 52 cards!");
 
         }
-        if ($session->has('deck')) {
-            $deck = ($session->get('deck'));
-        } else {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-            $session->set('deck', ($deck));
-        }
+
+        $deck = ($session->get('deck'));
 
         $cardHand = new CardHand();
         $cardsDrawn = [];
