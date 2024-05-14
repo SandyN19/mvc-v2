@@ -7,7 +7,9 @@
 <p>Here is a sorted deck of cards</p>
 <div class="card-container">
     {% for card in hand %}
-        <div class="card">{{ card.getAsString() }}</div>
+        <div class="card {% if card.suit == '♡' or card.suit == '♢' %}red{% endif %}">
+            {{ card.getAsString() }}
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

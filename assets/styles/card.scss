@@ -28,6 +28,10 @@
     background-color: #eee;
 }
 
+.card.red { 
+    color: red;
+}
+
 @media (max-width: 800px) {
     .card-container {
         grid-template-columns: repeat(13, 1fr);
@@ -37,5 +41,8 @@
     .card {
         padding: 5px; 
         font-size: 0.8em;
+    }
+    .card.red { 
+        color: red;
     }
 }
