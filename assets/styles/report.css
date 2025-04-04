@@ -1,3 +1,7 @@
+.kmom {
+    text-align: center;
+    max-width: 800px;
+}
 .kmom h2 a{
     text-decoration: none;
     color: var(--text-color);
