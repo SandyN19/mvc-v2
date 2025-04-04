@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/glider.svg') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <span class="site-title">MVC DV1608</span>
+    </header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('about') }}">About</a></li>
+            <li><a href="{{ path('report') }}">Report</a></li>
+            <li><a href="{{ path('lucky_number') }}">Lucky number</a></li>
+        </ul>
+    </nav>
+    <hr>
+    {% block body %}{% endblock %}
+    <footer>
+        <p>&copy; 2025 Sandy Nguyen - sang22@student.bth.se</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+@import url('navbar.css');
+@import url('header.css');
+@import url('home.css');
+@import url('about.css');
+@import url('report.css');
+@import url('footer.css');
+@import url('lucky.css');
+:root {
+    --text-color: #1D503A;
+    --background-color: #FAF6EF;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: var(--background-color);
+}
+
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+
+}
