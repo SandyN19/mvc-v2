@@ -1,0 +1,47 @@
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-title {
+    font-size: 2em;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 2em;
+}
+
+.about-main {
+    flex: 5;
+    margin: 0 2em;
+}
+
+.article {
+    flex: 1;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    opacity: 0.5;
+}
+.article:hover {
+    opacity: 1;
+}
+
+.article a{
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+    text-decoration: none;
+    color: var(--text-color);
+
+}
+
+.article h1{
+    font-style: italic;
+
+}
+
+.mvc-img{
+    width: 50%;
+    height: auto;
+}

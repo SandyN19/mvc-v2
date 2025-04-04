@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Kill the minions</h1>
+    <p>There is {{data}} minions to kill!</p>
+    <div class="minion-container">
+        {% for i in 0..data %}
+            <img src="{{ asset('img/minion.png') }}" alt="Zac">
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

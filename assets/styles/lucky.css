@@ -1,0 +1,9 @@
+.number{
+    text-decoration: solid;
+}
+.minion-container {
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
