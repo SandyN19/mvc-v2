@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Session Debug Information</h1>
+    <a href="{{ path('session_delete') }}" class="button-delete-session">Delete session</a>
+      {{ dump(session) }}
+</div>
+{{ include('flash.html.twig') }}
+{% endblock %}
