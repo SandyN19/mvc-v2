@@ -5,6 +5,7 @@
 @import url('report.css');
 @import url('footer.css');
 @import url('lucky.css');
+@import url('flash.css');
 :root {
     --text-color: #1D503A;
     --background-color: #FAF6EF;
