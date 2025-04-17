@@ -5,7 +5,7 @@ namespace App\Card;
 class CardGraphic extends Card
 {
     private $representation = '🂠';
-    public function construct($suit = null, $rank = null)
+    public function __construct($suit = null, $rank = null)
     {
         parent::construct($rank, $suit);
     }
