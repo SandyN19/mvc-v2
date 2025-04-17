@@ -7,6 +7,7 @@
 @import url('lucky.css');
 @import url('flash.css');
 @import url('buttons.css');
+@import url('card.css');
 :root {
     --text-color: #1D503A;
     --background-color: #FAF6EF;

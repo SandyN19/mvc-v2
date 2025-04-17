@@ -1,0 +1,13 @@
+.card{
+    font-size: 1.4rem;
+}
+.card.red{
+    color:red;
+}
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}

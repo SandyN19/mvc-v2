@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block body %}
+<h1>Deck of cards</h1>
+<p>Here is a sorted deck of cards</p>
+<div class="card-container">
+    {% for card in hand %}
+        <div class="card {% if card.suit == '♡' or card.suit == '♢' %}red{% endif %}">
+            {{ card.getAsString() }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
