@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block body %}
+<h1>Draw many cards</h1>
+
+<p>You drew {{ length }} cards.</p>
+<p> There is {{cards_left}} cards left in the deck.</p>
+<ul>
+<div class="card-container">
+{% for card in cards %}
+        <div class="card {% if card.suit == '♡' or card.suit == '♢' %}red{% endif %}">
+            {{ card.getAsString() }}
+        </div>
+    {% endfor %}
+</ul>
+</div>
+<p>Try to draw
+    <a href="{{ path('card_draw_many', {num: 5}) }}">5</a>
+    or 
+    <a href="{{ path('card_draw_many', {num: 10}) }}">10</a>
+    cards!
+</p>
+{% endblock %}

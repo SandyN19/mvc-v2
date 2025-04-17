@@ -43,13 +43,10 @@ class CardController extends AbstractController
     #[Route("card/deck/shuffle", name: "card_shuffle")]
     public function cardShuffle(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-            $session->set('deck', $deck);
-        }
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $session->set('deck', $deck);
+
 
         $cardsLeft = count($deck->getCards());
 
@@ -82,6 +79,42 @@ class CardController extends AbstractController
         ];
 
         return $this->render('card/draw.html.twig', $data);
+    }
+    #[Route("card/deck/draw/{num<\d+>}", name: "card_draw_many")]
+    public function cardDrawMany(
+        int $num,
+        SessionInterface $session
+    ): Response
+    {
+        if ($num > 52) {
+            throw new \Exception("Can't draw more than 52 cards!");
+        }
+        if ($session->has('deck')) {
+            $deck = $session->get('deck');
+        } else {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+            $session->set('deck', $deck);
+        }
+        $cardsDrawn = [];
+        for ($i = 1; $i <= $num; $i++) {
+            $cardsDrawn[] = $deck->drawCard();
+            $session->set('deck', $deck);
+        }
+
+        $session->set('deck', ($deck));
+        $lastCard = end($cardsDrawn);
+        $session->set('last_card', $lastCard);
+        $cardsLeft = count($deck->getCards());
+        
+
+        $data = [
+            "cards" => $cardsDrawn,
+            "length" => count($cardsDrawn),
+            "cards_left" => $cardsLeft,
+        ];
+
+        return $this->render('card/draw_many.html.twig', $data);
     }
 
 
