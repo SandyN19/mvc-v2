@@ -6,7 +6,6 @@ use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +49,6 @@ class CardController extends AbstractController
 
         $cardsLeft = count($deck->getCards());
 
-
         $data = [
             "hand" => $deck->display($cardsLeft),
             'session' => $session->clear()
@@ -65,7 +63,7 @@ class CardController extends AbstractController
             $deck = $session->get('deck');
         } else {
             $deck = new DeckOfCards();
-            $deck->drawCard();
+            $deck->shuffle();
             $session->set('deck', $deck);
         }
 
@@ -75,7 +73,7 @@ class CardController extends AbstractController
         $data = [
             "card" => $deck->drawCard(),
             "length" => count($deck->getCards()),
-            
+
         ];
 
         return $this->render('card/draw.html.twig', $data);
@@ -84,8 +82,7 @@ class CardController extends AbstractController
     public function cardDrawMany(
         int $num,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if ($num > 52) {
             throw new \Exception("Can't draw more than 52 cards!");
         }
@@ -106,7 +103,6 @@ class CardController extends AbstractController
         $lastCard = end($cardsDrawn);
         $session->set('last_card', $lastCard);
         $cardsLeft = count($deck->getCards());
-        
 
         $data = [
             "cards" => $cardsDrawn,
