@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API routes{% endblock %}
+
+{% block body %}
+<h1>API JSON routes</h1>
+<nav class="navbar">
+        <ul>
+            <li><a href="{{ path('api_quote') }}">Quotes</a></li>
+            <li><a href="{{ path('api_deck') }}">Deck of cards</a></li>
+            <li><a href="{{ path('api_deck_shuffle') }}">Shuffle cards</a></li>
+            <li><a href="{{ path('api_deck_draw') }}">Draw one card</a></li>
+            <li><a href="{{ path('api_deck_draw_many', {num: 5}) }}">Draw 5 cards</a></li>
+        </ul>
+    </nav>
+{% endblock %}
