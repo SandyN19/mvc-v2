@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+<h1>Game</h1>
+<nav class="navbar">
+        <ul>
+            <li><a href="{{ path('game_doc') }}">Docs</a></li>
+        </ul>
+    </nav>
+<p>Black Jack är ett amerikanskt hasardspel som liknar Baccarat. En svensk variant av Black Jack är tjugoett. Black Jack förekommer ofta på kasinon. </p>
+<p> Spelet går ut på att komma så nära 21 som möjligt utan att bli "tjock" (över 21). Man måste också få bättre kort än dealern. 
+Om både spelare och dealer har 17, 18, 19, 20 eller 21 så blir det "push", det innebär att spelare får tillbaka sin insats.</p>
+<p>Efter att dealern har gett ut två öppna kort till varje spelare samt ett kort till sig själv så får spelarna nu välja om de vill ha fler kort eller stanna. 
+När spelarna valt klart drar dealern kort. Dealern måste stanna på 17 eller bättre och ta kort om det är under 17. 
+Dealen måste stanna även om denna har exempelvis ess och 6:a dvs 7/17.</p>
+<img src="{{ asset('img/uml.png') }}" alt="klass diagram">
+{% endblock %}
