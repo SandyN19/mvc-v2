@@ -147,4 +147,41 @@ class ApiControllerJson
         );
         return $response;
     }
+    #[Route("/api/game", name: "api_game")]
+    public function gameStatus(SessionInterface $session): Response
+    {
+        
+        if ($session->has('deck')) {
+            $deck = $session->get('deck');
+        } else {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+            $session->set('deck', $deck);
+        }
+        if ($session->has('playerHand')) {
+            $playerHand = $session->get('playerHand');
+        } else {
+            $playerHand = new CardHand();
+            $session->set('playerHand', $playerHand);
+        }
+        if ($session->has('dealerHand')) {
+            $dealerHand = $session->get('dealerHand');
+        } else {
+            $dealerHand = new CardHand();
+            $session->set('dealerHand', $dealerHand);
+        }
+
+        $data = [
+            'playerHand' => $playerHand->showHand(),
+            'dealerHand' => $dealerHand->showHand(),
+            'playerValue' => $playerHand->getHandValue(),
+            'dealerValue' => $dealerHand->getHandValue(),
+        ];
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+        );
+        return $response;
+    }
 }

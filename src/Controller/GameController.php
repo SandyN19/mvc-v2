@@ -86,15 +86,15 @@ class GameController extends AbstractController
             "result" => $session->get('result'),
             "gameOver" => $session->get('gameOver'),
         ];
-        
+
 
         return $this->render('game/play.html.twig', $data);
     }
     #[Route("/game/hit", name: "game_hit", methods: ['POST'])]
     public function hit(
         Request $request,
-        SessionInterface $session): Response
-    {
+        SessionInterface $session
+    ): Response {
         $deck = $session->get('deck');
         $playerHand = $session->get('playerHand');
         $playerHand->drawCard($deck);
@@ -108,8 +108,7 @@ class GameController extends AbstractController
     public function stand(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = $session->get('deck');
         $dealerHand = $session->get('dealerHand');
         $playerHand = $session->get('playerHand');
@@ -121,7 +120,7 @@ class GameController extends AbstractController
             while ($dealerHand->getHandValue() < 17) {
                 $dealerHand->drawCard($deck);
             }
-        
+
             if ($playerHand->getHandValue() > 21) {
                 $session->set('result', "Player Bust");
             } elseif ($dealerHand->getHandValue() > 21) {
@@ -142,6 +141,6 @@ class GameController extends AbstractController
     }
 
 
-    
+
 
 }
