@@ -7,6 +7,7 @@
 <nav class="navbar">
         <ul>
             <li><a href="{{ path('game_doc') }}">Docs</a></li>
+            <li><a href="{{ path('game_init_get') }}">Play</a></li>
         </ul>
     </nav>
 <p>Black Jack är ett amerikanskt hasardspel som liknar Baccarat. En svensk variant av Black Jack är tjugoett. Black Jack förekommer ofta på kasinon. </p>
@@ -15,5 +16,4 @@ Om både spelare och dealer har 17, 18, 19, 20 eller 21 så blir det "push", det
 <p>Efter att dealern har gett ut två öppna kort till varje spelare samt ett kort till sig själv så får spelarna nu välja om de vill ha fler kort eller stanna. 
 När spelarna valt klart drar dealern kort. Dealern måste stanna på 17 eller bättre och ta kort om det är under 17. 
 Dealen måste stanna även om denna har exempelvis ess och 6:a dvs 7/17.</p>
-<img src="{{ asset('img/uml.png') }}" alt="klass diagram">
 {% endblock %}

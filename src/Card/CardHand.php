@@ -24,4 +24,20 @@ class CardHand
         return null;
     }
 
+    public function getHandValue(): int
+    {
+        $result = 0;
+        foreach ($this->hand as $card) {
+            if ($card->rank === 'A') {
+                $result += 11;
+            } elseif (in_array($card->rank, ['KN', 'D', 'K'])) {
+                $result += 10;
+            } else {
+                $result += (int)$card->rank;
+            }
+        }
+        return $result;
+    }
+
+
 }
