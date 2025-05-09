@@ -22,6 +22,7 @@ class ApiControllerJson
             '/deck/shuffle' => 'Shuffle deck',
             '/deck/draw' => 'Draw a card from deck',
             '/deck/draw/{num}' => 'Draw multiple cards from deck',
+            '/game' => 'Get game status',
         ];
 
         //return new JsonResponse($data);
@@ -150,7 +151,6 @@ class ApiControllerJson
     #[Route("/api/game", name: "api_game")]
     public function gameStatus(SessionInterface $session): Response
     {
-        
         if ($session->has('deck')) {
             $deck = $session->get('deck');
         } else {
