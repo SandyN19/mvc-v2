@@ -4,19 +4,20 @@ namespace App\Card;
 
 class CardHand
 {
-    private $hand = [];
+    /** @var Card[] */
+    private array $hand = [];
 
-    public function drawCard(DeckOfCards $deck)
+    public function drawCard(DeckOfCards $deck): void
     {
         $this->hand[] = $deck->drawCard();
     }
-
+    /** @return Card[] */
     public function showHand(): array
     {
         return $this->hand;
     }
 
-    public function getLastDrawnCard()
+    public function getLastDrawnCard(): ?Card
     {
         if (!empty($this->hand)) {
             return end($this->hand);
@@ -26,7 +27,7 @@ class CardHand
 
     public function getHandValue(): int
     {
-        $valueMap = [
+        $cardsValue = [
             'KN' => 10,
             'D'  => 10,
             'K'  => 10,
@@ -36,7 +37,7 @@ class CardHand
         $result = 0;
 
         foreach ($this->hand as $card) {
-            $result += $valueMap[$card->rank] ?? (int)$card->rank;
+            $result += $cardsValue[$card->rank] ?? (int)$card->rank;
         }
 
         return $result;

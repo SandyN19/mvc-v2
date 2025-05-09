@@ -4,10 +4,10 @@ namespace App\Card;
 
 class CardGraphic extends Card
 {
-    private $representation = '🂠';
-    public function __construct($suit = null, $rank = null)
+    private string $representation = '🂠';
+    public function __construct(string $suit = null, string $rank = null)
     {
-        parent::construct($rank, $suit);
+        parent::__construct($rank, $suit);
     }
 
     public function display(): string
