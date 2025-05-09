@@ -33,7 +33,6 @@ class GameController extends AbstractController
 
     #[Route("/game/init", name: "game_init_post", methods: ['POST'])]
     public function initCallback(
-        Request $request,
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -55,28 +54,24 @@ class GameController extends AbstractController
 
     #[Route("/game/play", name: "game_play", methods: ['GET'])]
     public function play(
-        Request $request,
         SessionInterface $session
     ): Response {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-        if ($session->has('playerHand')) {
-            $playerHand = $session->get('playerHand');
-        } else {
+        if (!$session->has('playerHand')) {
             $playerHand = new CardHand();
             $session->set('playerHand', $playerHand);
         }
-        if ($session->has('dealerHand')) {
-            $dealerHand = $session->get('dealerHand');
-        } else {
+        if (!$session->has('dealerHand')) {
             $dealerHand = new CardHand();
             $session->set('dealerHand', $dealerHand);
         }
+        $deck = $session->get('deck');
+        $playerHand = $session->get('playerHand');
+        $dealerHand = $session->get('dealerHand');
 
         $data = [
             "playerHand" => $playerHand->showHand(),
@@ -92,7 +87,6 @@ class GameController extends AbstractController
     }
     #[Route("/game/hit", name: "game_hit", methods: ['POST'])]
     public function hit(
-        Request $request,
         SessionInterface $session
     ): Response {
         $deck = $session->get('deck');
@@ -106,7 +100,6 @@ class GameController extends AbstractController
 
     #[Route("/game/stand", name: "game_stand", methods: ['POST'])]
     public function stand(
-        Request $request,
         SessionInterface $session
     ): Response {
         $deck = $session->get('deck');
@@ -139,8 +132,4 @@ class GameController extends AbstractController
 
         return $this->redirectToRoute('game_play');
     }
-
-
-
-
 }

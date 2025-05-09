@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class ApiControllerJson
 {
     #[Route("/api", name: "api_start")]
-    public function JsonStart(): Response
+    public function jsonStart(): Response
     {
         $routes = [
            '/quote' => 'Get a random quote',
@@ -58,12 +58,12 @@ class ApiControllerJson
     #[Route("/api/deck", name: "api_deck")]
     public function jsonDeck(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
+            
         }
+        $deck = $session->get('deck');
 
         //return new JsonResponse($data);
         $response = new JsonResponse($deck->getCards());
@@ -90,14 +90,14 @@ class ApiControllerJson
     #[Route("/api/deck/draw", name: "api_deck_draw")]
     public function jsonDeckDraw(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
+            
         }
+        $deck = $session->get('deck');
 
-        $cardsLeft = count($deck->getCards());
+
         $data = [
             "card" => $deck->drawCard(),
             "length" => count($deck->getCards()),
@@ -118,13 +118,12 @@ class ApiControllerJson
         if ($num > 52) {
             throw new \Exception("Can't draw more than 52 cards!");
         }
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
         }
+        $deck = $session->get('deck');
         $cardsDrawn = [];
         for ($i = 1; $i <= $num; $i++) {
             $cardsDrawn[] = $deck->drawCard();
@@ -151,25 +150,25 @@ class ApiControllerJson
     #[Route("/api/game", name: "api_game")]
     public function gameStatus(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-        if ($session->has('playerHand')) {
-            $playerHand = $session->get('playerHand');
-        } else {
+        
+        if (!$session->has('playerHand')) {
             $playerHand = new CardHand();
             $session->set('playerHand', $playerHand);
         }
-        if ($session->has('dealerHand')) {
-            $dealerHand = $session->get('dealerHand');
-        } else {
+
+        if (!$session->has('dealerHand')) {
             $dealerHand = new CardHand();
             $session->set('dealerHand', $dealerHand);
         }
+
+        $deck = $session->get('deck');
+        $playerHand = $session->get('playerHand');
+        $dealerHand = $session->get('dealerHand');
 
         $data = [
             'playerHand' => $playerHand->showHand(),

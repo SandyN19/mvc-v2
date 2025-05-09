@@ -26,18 +26,20 @@ class CardHand
 
     public function getHandValue(): int
     {
+        $valueMap = [
+            'KN' => 10,
+            'D'  => 10,
+            'K'  => 10,
+            'A'  => 11
+        ];
+
         $result = 0;
+
         foreach ($this->hand as $card) {
-            if ($card->rank === 'A') {
-                $result += 11;
-            } elseif (in_array($card->rank, ['KN', 'D', 'K'])) {
-                $result += 10;
-            } else {
-                $result += (int)$card->rank;
-            }
+            $result += $valueMap[$card->rank] ?? (int)$card->rank;
         }
+
         return $result;
     }
-
 
 }

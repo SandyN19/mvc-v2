@@ -23,12 +23,12 @@ class CardController extends AbstractController
     #[Route("card/deck", name: "card_deck")]
     public function cardDisplay(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
+            
         }
+        $deck = $session->get('deck');
 
         $cardsLeft = count($deck->getCards());
 
@@ -59,16 +59,13 @@ class CardController extends AbstractController
     #[Route("card/deck/draw", name: "card_draw")]
     public function cardDraw(SessionInterface $session): Response
     {
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
+            
         }
-
-        $cardsLeft = count($deck->getCards());
-
+        $deck = $session->get('deck');
 
         $data = [
             "card" => $deck->drawCard(),
@@ -86,13 +83,14 @@ class CardController extends AbstractController
         if ($num > 52) {
             throw new \Exception("Can't draw more than 52 cards!");
         }
-        if ($session->has('deck')) {
-            $deck = $session->get('deck');
-        } else {
+        if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
         }
+        
+        $deck = $session->get('deck');
+        
         $cardsDrawn = [];
         for ($i = 1; $i <= $num; $i++) {
             $cardsDrawn[] = $deck->drawCard();
