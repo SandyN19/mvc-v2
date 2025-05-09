@@ -61,7 +61,7 @@ class ApiControllerJson
         if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
-            
+
         }
         $deck = $session->get('deck');
 
@@ -93,7 +93,7 @@ class ApiControllerJson
         if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
-            
+
         }
         $deck = $session->get('deck');
 
@@ -155,7 +155,7 @@ class ApiControllerJson
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-        
+
         if (!$session->has('playerHand')) {
             $playerHand = new CardHand();
             $session->set('playerHand', $playerHand);
