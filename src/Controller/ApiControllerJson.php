@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ApiControllerJson
 {
-    #[Route("/api", name: "api_start")]
+    #[Route("/api/json", name: "api_start_json")]
     public function jsonStart(): Response
     {
         $routes = [

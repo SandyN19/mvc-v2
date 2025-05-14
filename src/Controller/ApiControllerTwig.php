@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ApiControllerTwig extends AbstractController
 {
-    #[Route("/api/twig", name: "Api_twig_start")]
+    #[Route("/api", name: "api_start")]
     public function home(): Response
     {
         return $this->render('Api/home.html.twig');
