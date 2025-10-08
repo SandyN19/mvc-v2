@@ -9,7 +9,10 @@ class CardHand
 
     public function drawCard(DeckOfCards $deck): void
     {
-        $this->hand[] = $deck->drawCard();
+        $card = $deck->drawCard();
+        if ($card !== null) {
+            $this->hand[] = $card;
+        }
     }
     /** @return Card[] */
     public function showHand(): array

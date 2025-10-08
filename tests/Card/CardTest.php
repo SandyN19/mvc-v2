@@ -78,6 +78,7 @@ class CardTest extends TestCase
         $hand = new CardHand();
         $hand->drawCard($deck);
         $lastDrawn = $hand->getLastDrawnCard();
+        $this->assertInstanceOf("\App\Card\Card", $lastDrawn);
         $this->assertEquals($lastDrawn->getAsString(), "[A♠]");
         $this->assertNotEmpty($hand->showHand());
     }
@@ -125,5 +126,15 @@ class CardTest extends TestCase
     public function testDisplayDeck(){
         $deck = new DeckOfCards();
         $this->assertCount(52, $deck->display(52));
+    }
+
+    /**
+     * Testing if Display works on empty deck
+     * @return void
+     */
+    public function testDisplayDeckEmpty(){
+        $deck = new DeckOfCards();
+        
+        $this->assertEmpty($deck->display(0));
     }
 }

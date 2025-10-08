@@ -69,8 +69,11 @@ class GameController extends AbstractController
             $dealerHand = new CardHand();
             $session->set('dealerHand', $dealerHand);
         }
+        /** @var DeckOfCards $deck */
         $deck = $session->get('deck');
+        /** @var CardHand $playerHand */
         $playerHand = $session->get('playerHand');
+        /** @var CardHand $dealerHand */
         $dealerHand = $session->get('dealerHand');
 
         $data = [
@@ -89,7 +92,9 @@ class GameController extends AbstractController
     public function hit(
         SessionInterface $session
     ): Response {
+        /** @var DeckOfCards $deck */
         $deck = $session->get('deck');
+        /** @var CardHand $playerHand */
         $playerHand = $session->get('playerHand');
         $playerHand->drawCard($deck);
         $session->set('deck', $deck);
@@ -102,29 +107,30 @@ class GameController extends AbstractController
     public function stand(
         SessionInterface $session
     ): Response {
+        /** @var DeckOfCards $deck */
         $deck = $session->get('deck');
+        /** @var CardHand $dealerHand */
         $dealerHand = $session->get('dealerHand');
+        /** @var CardHand $playerHand */
         $playerHand = $session->get('playerHand');
 
         if ($playerHand->getHandValue() > 21) {
             $dealerHand->drawCard($deck);
             $session->set('result', "Dealer Wins");
+        }
+        while ($dealerHand->getHandValue() < 17) {
+            $dealerHand->drawCard($deck);
+        }
+        if ($playerHand->getHandValue() > 21) {
+            $session->set('result', "Player Bust");
+        } elseif ($dealerHand->getHandValue() > 21) {
+            $session->set('result', "Dealer Bust");
+        } elseif ($playerHand->getHandValue() === $dealerHand->getHandValue()) {
+            $session->set('result', "Push");
+        } elseif ($playerHand->getHandValue() < $dealerHand->getHandValue()) {
+            $session->set('result', "Dealer Wins");
         } else {
-            while ($dealerHand->getHandValue() < 17) {
-                $dealerHand->drawCard($deck);
-            }
-
-            if ($playerHand->getHandValue() > 21) {
-                $session->set('result', "Player Bust");
-            } elseif ($dealerHand->getHandValue() > 21) {
-                $session->set('result', "Dealer Bust");
-            } elseif ($playerHand->getHandValue() === $dealerHand->getHandValue()) {
-                $session->set('result', "Push");
-            } elseif ($playerHand->getHandValue() < $dealerHand->getHandValue()) {
-                $session->set('result', "Dealer Wins");
-            } else {
-                $session->set('result', "Player Wins");
-            }
+            $session->set('result', "Player Wins");
         }
         $session->set('gameOver', true);
         $session->set('deck', $deck);

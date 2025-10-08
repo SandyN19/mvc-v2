@@ -26,10 +26,10 @@ class SessionController extends AbstractController
             'notice',
             'Session is now deleted!'
         );
-        $data = [
-            'session' => $session->clear()
-        ];
-        return $this->redirectToRoute('session_start', $data);
+        // clear session (clear() returns void)
+        $session->clear();
+
+        return $this->redirectToRoute('session_start');
     }
 
 }

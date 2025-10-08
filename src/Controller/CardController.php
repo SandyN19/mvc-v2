@@ -28,7 +28,8 @@ class CardController extends AbstractController
             $session->set('deck', $deck);
 
         }
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
 
         $cardsLeft = count($deck->getCards());
 
@@ -46,12 +47,13 @@ class CardController extends AbstractController
         $deck->shuffle();
         $session->set('deck', $deck);
 
-
         $cardsLeft = count($deck->getCards());
+
+        // Clear the session explicitly (clear() returns void)
+        $session->clear();
 
         $data = [
             "hand" => $deck->display($cardsLeft),
-            'session' => $session->clear()
         ];
 
         return $this->render('card/shuffle.html.twig', $data);
@@ -65,7 +67,8 @@ class CardController extends AbstractController
             $session->set('deck', $deck);
 
         }
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
 
         $data = [
             "card" => $deck->drawCard(),
@@ -89,7 +92,8 @@ class CardController extends AbstractController
             $session->set('deck', $deck);
         }
 
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
 
         $cardsDrawn = [];
         for ($i = 1; $i <= $num; $i++) {

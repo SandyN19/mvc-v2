@@ -63,7 +63,8 @@ class ApiControllerJson
             $session->set('deck', $deck);
 
         }
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
 
         //return new JsonResponse($data);
         $response = new JsonResponse($deck->getCards());
@@ -95,7 +96,8 @@ class ApiControllerJson
             $session->set('deck', $deck);
 
         }
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
 
 
         $data = [
@@ -123,7 +125,8 @@ class ApiControllerJson
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-        $deck = $session->get('deck');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
         $cardsDrawn = [];
         for ($i = 1; $i <= $num; $i++) {
             $cardsDrawn[] = $deck->drawCard();
@@ -166,9 +169,12 @@ class ApiControllerJson
             $session->set('dealerHand', $dealerHand);
         }
 
-        $deck = $session->get('deck');
-        $playerHand = $session->get('playerHand');
-        $dealerHand = $session->get('dealerHand');
+    /** @var DeckOfCards $deck */
+    $deck = $session->get('deck');
+    /** @var CardHand $playerHand */
+    $playerHand = $session->get('playerHand');
+    /** @var CardHand $dealerHand */
+    $dealerHand = $session->get('dealerHand');
 
         $data = [
             'playerHand' => $playerHand->showHand(),

@@ -31,9 +31,10 @@ class DeckOfCards
      */
     public function display( int $numOfCards): array
     {
-        for ($i = 0; $i <= $numOfCards; $i++) {
-            return $this->cards;
+        if ($numOfCards <= 0) {
+            return [];
         }
+        return array_slice($this->cards, 0, $numOfCards);
     }
     public function drawCard(): ?Card
     {
