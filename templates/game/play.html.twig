@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ path('game_start') }}">Hem</a></li>
+            <li><a href="{{ path('game_init_get') }}">Play</a></li>
+        </ul>
+    </nav>
+<h1>BlackJack [PLAYING]</h1>
+<p>Player hand: {{ playerHandValue}}</p>
+<p>Dealer hand: {{ dealerHandValue }}</p>
+{% if gameOver == true %}
+    <p>Result: {{ result }}</p>
+{% endif %}
+
+
+<h2>Player Hand</h2>
+<div class="card-container">
+    {% for card in playerHand %}
+        <div class="card {% if card.suit == '♡' or card.suit == '♢' %}red{% endif %}">
+            {{ card.getAsString() }}
+        </div>
+    {% endfor %}
+</div>
+
+<h2>Dealer Hand</h2>
+<div class="card-container">
+    {% for card in dealerHand %}
+        <div class="card {% if card.suit == '♡' or card.suit == '♢' %}red{% endif %}">
+            [{{ card.rank }}{{ card.suit }}]
+        </div>
+    {% endfor %}
+</div>
+
+<form method="post" action="{{ path('game_hit') }}">
+    <button type="submit" {% if playerHandValue >= 21 or gameOver == true %}disabled{% endif %}>
+        Dra ett till kort
+    </button>
+</form>
+
+<form method="post" action="{{ path('game_stand') }}">
+    <button type="submit" {% if gameOver == true %}disabled{% endif %}>
+        Stanna
+    </button>
+</form>
+
+
+{% if gameOver == true %}
+    <form method="post" action="{{ path('game_init_get') }}">
+        <button type="submit">
+            Börja ny runda
+        </button>
+    </form>
+{% endif %}
+
+{% endblock %}
