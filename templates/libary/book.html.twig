@@ -8,6 +8,7 @@
         <p>Author: {{ book.author }}</p>
         <img src="{{ book.img }}" alt="Book cover" width="300">
         <p>ISBN: {{ book.isbn }}</p>
+        <a href="{{ path('libary_delete_one', {id: book.id}) }}">Delete book</a>
     </div>
 
 {% endblock %}
