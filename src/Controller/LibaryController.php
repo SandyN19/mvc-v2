@@ -52,6 +52,23 @@ final class LibaryController extends AbstractController
         return $this->redirectToRoute('libary');
         
     }
+    #[Route('/libary/show/{id}', name: 'libary_show_one')]
+    public function showOneBook(
+        BooksRepository $BooksRepository,
+        int $id
+    ): Response {
+
+        $book = $BooksRepository
+            ->find($id);
+
+        $data = [
+            "book" => $book
+        ];
+
+        
+        return $this->render('libary/book.html.twig', $data);
+    }
+
 
     
 }

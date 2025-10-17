@@ -8,12 +8,15 @@
         <h2><a href="{{ path('libary_form') }}">Add a book</a></h2>
         <ul>
             {% for book in books %}
+            <a href="{{ path('libary_show_one', {id: book.id}) }}">
                 <li>
+                
                     <h3>{{ book.title }}</h3>
                     <p>Author: {{ book.author }}</p>
                     <p>ISBN: {{ book.isbn }}</p>
                     <img src="{{ book.img }}" alt="Book cover" width="100">
                 </li>
+            <a/>
             {% else %}
                 <p>No books found.</p>
             {% endfor %}
