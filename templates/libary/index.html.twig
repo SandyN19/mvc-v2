@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Books</h1>
+        <h2><a href="{{ path('libary_form') }}">Add a book</a></h2>
+        <ul>
+            {% for book in books %}
+                <li>
+                    <h3>{{ book.title }}</h3>
+                    <p>Author: {{ book.author }}</p>
+                    <p>ISBN: {{ book.isbn }}</p>
+                    <img src="{{ book.img }}" alt="Book cover" width="100">
+                </li>
+            {% else %}
+                <p>No books found.</p>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
