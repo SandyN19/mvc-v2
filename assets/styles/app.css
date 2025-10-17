@@ -9,6 +9,8 @@
 @import url('buttons.css');
 @import url('card.css');
 @import url('game.css');
+@import url('libary.css');
+
 :root {
     --text-color: #1D503A;
     --background-color: #FAF6EF;
