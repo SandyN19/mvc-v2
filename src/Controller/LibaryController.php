@@ -32,7 +32,7 @@ final class LibaryController extends AbstractController
         return $this->render('libary/form.html.twig');
     }
 
-    #[Route('/libary/add', name: 'libary_add')]
+    #[Route('/libary/add', name: 'libary_add', methods: ['POST'])]
     public function addBook(
         ManagerRegistry $doctrine,
         Request $request
@@ -68,7 +68,7 @@ final class LibaryController extends AbstractController
         
         return $this->render('libary/book.html.twig', $data);
     }
-    #[Route('/libary/delete/{id}', name: 'libary_delete_one')]
+    #[Route('/libary/delete/{id}', name: 'libary_delete_one', methods: ['POST'])]
     public function deleteOneBook(
         ManagerRegistry $doctrine,
         int $id
@@ -88,6 +88,40 @@ final class LibaryController extends AbstractController
 
         return $this->redirectToRoute('libary');
     }
+      #[Route('/libary/updateForm/{id}', name: 'libary_update_one_form')]
+        public function showUpdateForm(
+            BooksRepository $BooksRepository,
+            int $id
+        ): Response {
+
+            $book = $BooksRepository
+                ->find($id);
+
+            $data = [
+                "book" => $book
+            ];
+  
+            return $this->render('libary/update.html.twig', $data);
+        }
+
+        #[Route('/libary/update/{id}', name: 'libary_update_one', methods: ['POST'])]
+        public function updateOneBook(
+            ManagerRegistry $doctrine,
+            Request $request,
+            int $id
+        ): Response {
+            $entityManager = $doctrine->getManager();
+            $book = $entityManager->getRepository(Books::class)->find($id);
+
+            $book->setTitle($request->request->get('title'));
+            $book->setAuthor($request->request->get('author'));
+            $book->setIsbn($request->request->get('isbn'));
+            $book->setImg($request->request->get('img'));
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('libary');
+        }
 
 
     
