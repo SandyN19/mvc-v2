@@ -43,7 +43,7 @@ final class LibaryController extends AbstractController
 
         $book->setTitle((string) $request->request->get('title'));
         $book->setAuthor((string) $request->request->get('author'));
-        $book->setIsbn((int) $request->request->get('isbn'));
+        $book->setIsbn((string) $request->request->get('isbn'));
         $book->setImg((string) $request->request->get('img'));
 
         $entityManager->persist($book);
@@ -119,7 +119,7 @@ final class LibaryController extends AbstractController
             }
             $book->setTitle((string) $request->request->get('title'));
             $book->setAuthor((string) $request->request->get('author'));
-            $book->setIsbn((int) $request->request->get('isbn'));
+            $book->setIsbn((string) $request->request->get('isbn'));
             $book->setImg((string) $request->request->get('img'));
 
             $entityManager->flush();

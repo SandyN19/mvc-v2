@@ -17,7 +17,7 @@ class Books
     private ?string $title = null;
 
     #[ORM\Column]
-    private ?int $isbn = null;
+    private ?string $isbn = null;
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
