@@ -8,8 +8,10 @@
         <p>Author: {{ book.author }}</p>
         <img src="{{ book.img }}" alt="Book cover" width="300">
         <p>ISBN: {{ book.isbn }}</p>
-        <a href="{{ path('libary_update_one_form', {id: book.id}) }}">Update book</a>
-        <a href="{{ path('libary_delete_one', {id: book.id}) }}">Delete book</a>
+        <a href="{{ path('libary_update_one_form', {id: book.id}) }}" class="update-button">Update book</a>
+        <form action="{{ path('libary_delete_one', {id: book.id}) }}" method="post">
+            <button type="submit"  class="form-button">Delete</button>
+        </form>
     </div>
 
 {% endblock %}

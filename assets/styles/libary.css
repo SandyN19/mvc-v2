@@ -12,3 +12,27 @@ ul a{
     color: black;
     text-align: center;
 }
+.add-button{
+    background-color: var(--text-color);
+    padding: 0.4rem;
+    border: 1px solid black;
+    
+}
+.add-button a{
+    text-decoration: none;
+    color: #eee;
+}
+
+.update-button{
+    background-color: #f0f;
+    padding: 0.4rem;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    color: #eee;
+    text-decoration: none;
+    
+}
+.form-button{
+    padding: 0.4rem 1rem;
+    
+}

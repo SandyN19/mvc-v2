@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <h1>Books</h1>
-        <h2><a href="{{ path('libary_form') }}">Add a book</a></h2>
+        <h2 class="add-button"><a href="{{ path('libary_form') }}">Add a book</a></h2>
         <ul>
             {% for book in books %}
             <a href="{{ path('libary_show_one', {id: book.id}) }}">
