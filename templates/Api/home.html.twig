@@ -12,6 +12,9 @@
             <li><a href="{{ path('api_deck_draw') }}">Draw one card</a></li>
             <li><a href="{{ path('api_deck_draw_many', {num: 5}) }}">Draw 5 cards</a></li>
             <li><a href="{{ path('api_game') }}">BlackJack</a></li>
+            <li><a href="{{ path('api_libary_books') }}">Books</a></li>
+            <li><a href="{{ path('api_libary_books_isbn', {isbn: '9789180371506'}) }}">Book by isbn</a></li>
+            
         </ul>
     </nav>
 {% endblock %}

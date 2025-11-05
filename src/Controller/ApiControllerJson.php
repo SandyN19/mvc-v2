@@ -6,12 +6,15 @@ use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\BooksRepository;
 
-class ApiControllerJson
+class ApiControllerJson extends AbstractController
 {
     #[Route("/api/json", name: "api_start_json")]
     public function jsonStart(): Response
@@ -189,4 +192,47 @@ class ApiControllerJson
         );
         return $response;
     }
+    #[Route("/api/libary/books", name: "api_libary_books")]
+    public function books(BooksRepository $BooksRepository): Response
+    {
+        $books = $BooksRepository
+            ->findAll();
+
+        $data = [];
+        foreach ($books as $book) {
+            $data[] = [
+                'id' => $book->getId(),
+                'title' => $book->getTitle(),
+                'author' => $book->getAuthor(),
+                'isbn' => $book->getIsbn(),
+                'img' => $book->getImg(),
+            ];
+        }
+
+        $response = new JsonResponse(['books' => $data]);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+    #[Route("/api/libary/book/{isbn}", name: "api_libary_books_isbn")]
+    public function booksByIsbn(BooksRepository $BooksRepository, string $isbn): Response
+    {
+        $book = $BooksRepository->findOneBy(['isbn' => $isbn]);
+
+        $data = [
+            'id' => $book->getId(),
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'isbn' => $book->getIsbn(),
+            'img' => $book->getImg(),
+        ];
+
+    $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+    
 }
