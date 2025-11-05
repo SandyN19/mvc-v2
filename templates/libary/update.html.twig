@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<h1>Update book: {{ book.title }}</h1>
+
+<form action="{{ path('libary_update_one', {'id': book.id}) }}" method="post">
+    <label>Title</label><br>
+    <input type="text" name="title" value="{{ book.title }}"><br><br>
+
+    <label>Author</label><br>
+    <input type="text" name="author" value="{{ book.author }}"><br><br>
+
+    <label>ISBN</label><br>
+    <input type="text" name="isbn" value="{{ book.isbn }}"><br><br>
+
+    <label>Image URL</label><br>
+    <input type="text" name="img" value="{{ book.img }}"><br><br>
+
+    <button type="submit">Save changes</button>
+</form>
+
+{% endblock %}
