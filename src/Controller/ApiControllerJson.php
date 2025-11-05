@@ -220,6 +220,12 @@ class ApiControllerJson extends AbstractController
     {
         $book = $BooksRepository->findOneBy(['isbn' => $isbn]);
 
+        if (!$book) {
+        return new JsonResponse([
+            'error' => "No book found with isbn: $isbn"
+        ], 404);
+    }
+
         $data = [
             'id' => $book->getId(),
             'title' => $book->getTitle(),

@@ -41,10 +41,10 @@ final class LibaryController extends AbstractController
         $entityManager = $doctrine->getManager();
         $book = new Books();
 
-        $book->setTitle($request->request->get('title'));
-        $book->setAuthor($request->request->get('author'));
-        $book->setIsbn($request->request->get('isbn'));
-        $book->setImg($request->request->get('img'));
+        $book->setTitle((string) $request->request->get('title'));
+        $book->setAuthor((string) $request->request->get('author'));
+        $book->setIsbn((int) $request->request->get('isbn'));
+        $book->setImg((string) $request->request->get('img'));
 
         $entityManager->persist($book);
         $entityManager->flush();
@@ -112,11 +112,15 @@ final class LibaryController extends AbstractController
         ): Response {
             $entityManager = $doctrine->getManager();
             $book = $entityManager->getRepository(Books::class)->find($id);
-
-            $book->setTitle($request->request->get('title'));
-            $book->setAuthor($request->request->get('author'));
-            $book->setIsbn($request->request->get('isbn'));
-            $book->setImg($request->request->get('img'));
+            if (!$book) {
+                throw $this->createNotFoundException(
+                    'No book found for id '.$id
+                );
+            }
+            $book->setTitle((string) $request->request->get('title'));
+            $book->setAuthor((string) $request->request->get('author'));
+            $book->setIsbn((int) $request->request->get('isbn'));
+            $book->setImg((string) $request->request->get('img'));
 
             $entityManager->flush();
 
