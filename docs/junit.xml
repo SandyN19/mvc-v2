@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="11" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.013929">
+    <testsuite name="Project Test Suite" tests="11" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.013929">
+      <testsuite name="App\Card\CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" tests="11" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.013929">
+        <testcase name="testCreateCardHand" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="18" assertions="2" time="0.006452"/>
+        <testcase name="testCreatedeck" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="29" assertions="2" time="0.001208"/>
+        <testcase name="testCreateCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="38" assertions="4" time="0.000884"/>
+        <testcase name="testDrawCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="51" assertions="2" time="0.001210"/>
+        <testcase name="testShuffe" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="63" assertions="1" time="0.000904"/>
+        <testcase name="testGetLastDrawnCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="76" assertions="3" time="0.000340"/>
+        <testcase name="testGetLastDrawnCardEmpty" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="90" assertions="2" time="0.001209"/>
+        <testcase name="testGetHandValue" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="101" assertions="1" time="0.000359"/>
+        <testcase name="testDisplay" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="113" assertions="2" time="0.000743"/>
+        <testcase name="testDisplayDeck" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="126" assertions="1" time="0.000341"/>
+        <testcase name="testDisplayDeckEmpty" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/sandy/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="135" assertions="1" time="0.000277"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
