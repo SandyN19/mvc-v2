@@ -2,38 +2,36 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Card\Card;
-use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
-    #[Route("/game", name: "game_start")]
+    #[Route('/game', name: 'game_start')]
     public function home(): Response
     {
         return $this->render('game/home.html.twig');
     }
-    #[Route("/game/doc", name: "game_doc")]
+
+    #[Route('/game/doc', name: 'game_doc')]
     public function doc(): Response
     {
         return $this->render('game/doc.html.twig');
     }
-    #[Route("/game/init", name: "game_init_get", methods: ['GET'])]
+
+    #[Route('/game/init', name: 'game_init_get', methods: ['GET'])]
     public function init(): Response
     {
-
         return $this->render('game/init.html.twig');
     }
 
-    #[Route("/game/init", name: "game_init_post", methods: ['POST'])]
+    #[Route('/game/init', name: 'game_init_post', methods: ['POST'])]
     public function initCallback(
-        SessionInterface $session
+        SessionInterface $session,
     ): Response {
         $deck = new DeckOfCards();
         $deck->shuffle();
@@ -52,9 +50,9 @@ class GameController extends AbstractController
         return $this->redirectToRoute('game_play');
     }
 
-    #[Route("/game/play", name: "game_play", methods: ['GET'])]
+    #[Route('/game/play', name: 'game_play', methods: ['GET'])]
     public function play(
-        SessionInterface $session
+        SessionInterface $session,
     ): Response {
         if (!$session->has('deck')) {
             $deck = new DeckOfCards();
@@ -77,20 +75,20 @@ class GameController extends AbstractController
         $dealerHand = $session->get('dealerHand');
 
         $data = [
-            "playerHand" => $playerHand->showHand(),
-            "dealerHand" => $dealerHand->showHand(),
-            "playerHandValue" => $playerHand->getHandValue(),
-            "dealerHandValue" => $dealerHand->getHandValue(),
-            "result" => $session->get('result'),
-            "gameOver" => $session->get('gameOver'),
+            'playerHand' => $playerHand->showHand(),
+            'dealerHand' => $dealerHand->showHand(),
+            'playerHandValue' => $playerHand->getHandValue(),
+            'dealerHandValue' => $dealerHand->getHandValue(),
+            'result' => $session->get('result'),
+            'gameOver' => $session->get('gameOver'),
         ];
-
 
         return $this->render('game/play.html.twig', $data);
     }
-    #[Route("/game/hit", name: "game_hit", methods: ['POST'])]
+
+    #[Route('/game/hit', name: 'game_hit', methods: ['POST'])]
     public function hit(
-        SessionInterface $session
+        SessionInterface $session,
     ): Response {
         /** @var DeckOfCards $deck */
         $deck = $session->get('deck');
@@ -103,9 +101,9 @@ class GameController extends AbstractController
         return $this->redirectToRoute('game_play');
     }
 
-    #[Route("/game/stand", name: "game_stand", methods: ['POST'])]
+    #[Route('/game/stand', name: 'game_stand', methods: ['POST'])]
     public function stand(
-        SessionInterface $session
+        SessionInterface $session,
     ): Response {
         /** @var DeckOfCards $deck */
         $deck = $session->get('deck');
@@ -116,21 +114,21 @@ class GameController extends AbstractController
 
         if ($playerHand->getHandValue() > 21) {
             $dealerHand->drawCard($deck);
-            $session->set('result', "Dealer Wins");
+            $session->set('result', 'Dealer Wins');
         }
         while ($dealerHand->getHandValue() < 17) {
             $dealerHand->drawCard($deck);
         }
         if ($playerHand->getHandValue() > 21) {
-            $session->set('result', "Player Bust");
+            $session->set('result', 'Player Bust');
         } elseif ($dealerHand->getHandValue() > 21) {
-            $session->set('result', "Dealer Bust");
+            $session->set('result', 'Dealer Bust');
         } elseif ($playerHand->getHandValue() === $dealerHand->getHandValue()) {
-            $session->set('result', "Push");
+            $session->set('result', 'Push');
         } elseif ($playerHand->getHandValue() < $dealerHand->getHandValue()) {
-            $session->set('result', "Dealer Wins");
+            $session->set('result', 'Dealer Wins');
         } else {
-            $session->set('result', "Player Wins");
+            $session->set('result', 'Player Wins');
         }
         $session->set('gameOver', true);
         $session->set('deck', $deck);

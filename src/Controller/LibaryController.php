@@ -2,25 +2,25 @@
 
 namespace App\Controller;
 
+use App\Entity\Books;
+use App\Repository\BooksRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Books;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\BooksRepository;
 
 final class LibaryController extends AbstractController
 {
     #[Route('/libary', name: 'libary')]
     public function showAllBooks(
-        BooksRepository $BooksRepository
-    ): response {
+        BooksRepository $BooksRepository,
+    ): Response {
         $books = $BooksRepository
             ->findAll();
 
         $data = [
-            "books" => $books
+            'books' => $books,
         ];
 
         return $this->render('libary/index.html.twig', $data);
@@ -35,9 +35,8 @@ final class LibaryController extends AbstractController
     #[Route('/libary/add', name: 'libary_add', methods: ['POST'])]
     public function addBook(
         ManagerRegistry $doctrine,
-        Request $request
+        Request $request,
     ): Response {
-
         $entityManager = $doctrine->getManager();
         $book = new Books();
 
@@ -50,37 +49,33 @@ final class LibaryController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('libary');
-        
     }
+
     #[Route('/libary/show/{id}', name: 'libary_show_one')]
     public function showOneBook(
         BooksRepository $BooksRepository,
-        int $id
+        int $id,
     ): Response {
-
         $book = $BooksRepository
             ->find($id);
 
         $data = [
-            "book" => $book
+            'book' => $book,
         ];
 
-        
         return $this->render('libary/book.html.twig', $data);
     }
+
     #[Route('/libary/delete/{id}', name: 'libary_delete_one', methods: ['POST'])]
     public function deleteOneBook(
         ManagerRegistry $doctrine,
-        int $id
+        int $id,
     ): Response {
-
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(books::class)->find($id);
+        $book = $entityManager->getRepository(Books::class)->find($id);
 
         if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id '.$id
-            );
+            throw $this->createNotFoundException('No book found for id '.$id);
         }
 
         $entityManager->remove($book);
@@ -88,45 +83,40 @@ final class LibaryController extends AbstractController
 
         return $this->redirectToRoute('libary');
     }
-      #[Route('/libary/updateForm/{id}', name: 'libary_update_one_form')]
-        public function showUpdateForm(
-            BooksRepository $BooksRepository,
-            int $id
-        ): Response {
 
-            $book = $BooksRepository
-                ->find($id);
+    #[Route('/libary/updateForm/{id}', name: 'libary_update_one_form')]
+    public function showUpdateForm(
+        BooksRepository $BooksRepository,
+        int $id,
+    ): Response {
+        $book = $BooksRepository
+            ->find($id);
 
-            $data = [
-                "book" => $book
-            ];
-  
-            return $this->render('libary/update.html.twig', $data);
+        $data = [
+            'book' => $book,
+        ];
+
+        return $this->render('libary/update.html.twig', $data);
+    }
+
+    #[Route('/libary/update/{id}', name: 'libary_update_one', methods: ['POST'])]
+    public function updateOneBook(
+        ManagerRegistry $doctrine,
+        Request $request,
+        int $id,
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Books::class)->find($id);
+        if (!$book) {
+            throw $this->createNotFoundException('No book found for id '.$id);
         }
+        $book->setTitle((string) $request->request->get('title'));
+        $book->setAuthor((string) $request->request->get('author'));
+        $book->setIsbn((string) $request->request->get('isbn'));
+        $book->setImg((string) $request->request->get('img'));
 
-        #[Route('/libary/update/{id}', name: 'libary_update_one', methods: ['POST'])]
-        public function updateOneBook(
-            ManagerRegistry $doctrine,
-            Request $request,
-            int $id
-        ): Response {
-            $entityManager = $doctrine->getManager();
-            $book = $entityManager->getRepository(Books::class)->find($id);
-            if (!$book) {
-                throw $this->createNotFoundException(
-                    'No book found for id '.$id
-                );
-            }
-            $book->setTitle((string) $request->request->get('title'));
-            $book->setAuthor((string) $request->request->get('author'));
-            $book->setIsbn((string) $request->request->get('isbn'));
-            $book->setImg((string) $request->request->get('img'));
+        $entityManager->flush();
 
-            $entityManager->flush();
-
-            return $this->redirectToRoute('libary');
-        }
-
-
-    
+        return $this->redirectToRoute('libary');
+    }
 }

@@ -16,7 +16,8 @@ class LuckyController
             '<html><body>Lucky number: '.$number.'</body></html>'
         );
     }
-    #[Route("/lucky/hi")]
+
+    #[Route('/lucky/hi')]
     public function hiMessage(): Response
     {
         return new Response(

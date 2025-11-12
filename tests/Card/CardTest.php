@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test cases for class Card.
  * Covers Card, CardHand, DeckOfCards and CardGraphic
- * 
+ *
  */
 class CardTest extends TestCase
 {
@@ -26,7 +26,8 @@ class CardTest extends TestCase
      * Testing if deck can be created
      * @return void
      */
-    public function testCreatedeck(){
+    public function testCreatedeck()
+    {
         $deck = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
         $this->assertCount(52, $deck->getCards());
@@ -48,7 +49,8 @@ class CardTest extends TestCase
      * @return void
      */
 
-    public function testDrawCard(){
+    public function testDrawCard()
+    {
         $deck = new DeckOfCards();
         $hand = new CardHand();
         $hand->drawCard($deck);
@@ -60,12 +62,13 @@ class CardTest extends TestCase
      * Testing if shullfe works
      * @return void
      */
-    public function testShuffe() {
+    public function testShuffe()
+    {
         $deck = new DeckOfCards();
         $shuffledDeck = new DeckOfCards();
         $shuffledDeck->shuffle();
 
-         $this->assertNotSame($deck->getCards(), $shuffledDeck->getCards());
+        $this->assertNotSame($deck->getCards(), $shuffledDeck->getCards());
     }
 
     /**
@@ -73,7 +76,8 @@ class CardTest extends TestCase
      * @return void
      */
 
-    public function testGetLastDrawnCard(){
+    public function testGetLastDrawnCard()
+    {
         $deck = new DeckOfCards();
         $hand = new CardHand();
         $hand->drawCard($deck);
@@ -87,7 +91,8 @@ class CardTest extends TestCase
      * @return void
      */
 
-    public function testGetLastDrawnCardEmpty(){
+    public function testGetLastDrawnCardEmpty()
+    {
         $hand = new CardHand();
         $lastDrawn = $hand->getLastDrawnCard();
         $this->assertNull($lastDrawn);
@@ -95,10 +100,11 @@ class CardTest extends TestCase
     }
 
     /**
-     * Testing if getHandValue works 
+     * Testing if getHandValue works
      * @return void
      */
-    public function testGetHandValue(){
+    public function testGetHandValue()
+    {
         $deck = new DeckOfCards();
         $hand = new CardHand();
         $hand->drawCard($deck);
@@ -110,12 +116,13 @@ class CardTest extends TestCase
      * Testing if Display graphis works
      * @return void
      */
-    public function testDisplay(){
-         $cardGraphic = new CardGraphic("A", "♥");
+    public function testDisplay()
+    {
+        $cardGraphic = new CardGraphic("A", "♥");
 
         $this->assertInstanceOf(CardGraphic::class, $cardGraphic);
 
-        
+
         $this->assertSame('🂠', $cardGraphic->display());
     }
 
@@ -123,7 +130,8 @@ class CardTest extends TestCase
      * Testing if Display works
      * @return void
      */
-    public function testDisplayDeck(){
+    public function testDisplayDeck()
+    {
         $deck = new DeckOfCards();
         $this->assertCount(52, $deck->display(52));
     }
@@ -132,9 +140,10 @@ class CardTest extends TestCase
      * Testing if Display works on empty deck
      * @return void
      */
-    public function testDisplayDeckEmpty(){
+    public function testDisplayDeckEmpty()
+    {
         $deck = new DeckOfCards();
-        
+
         $this->assertEmpty($deck->display(0));
     }
 }

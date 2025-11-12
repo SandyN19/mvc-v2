@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiControllerTwig extends AbstractController
+class MetricsController extends AbstractController
 {
-    #[Route('/api', name: 'api_start')]
+    #[Route('/metrics_start', name: 'metrics_start')]
     public function home(): Response
     {
-        return $this->render('Api/home.html.twig');
+        return $this->render('metrics/home.html.twig');
     }
 }

@@ -2,17 +2,15 @@
 
 namespace App\Card;
 
-use App\Card\Card;
-
 class DeckOfCards
 {
     /** @var Card[] */
-    public array $cards = array();
+    public array $cards = [];
 
     public function __construct()
     {
-        $suits = array("♠", '♣', '♢', '♡');
-        $ranks = array('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'KN', 'D', 'K');
+        $suits = ['♠', '♣', '♢', '♡'];
+        $ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'KN', 'D', 'K'];
 
         foreach ($suits as $suit) {
             foreach ($ranks as $rank) {
@@ -25,17 +23,19 @@ class DeckOfCards
     {
         shuffle($this->cards);
     }
+
     /**
-     * @param int $numOfCards
      * @return Card[]
      */
-    public function display( int $numOfCards): array
+    public function display(int $numOfCards): array
     {
         if ($numOfCards <= 0) {
             return [];
         }
+
         return array_slice($this->cards, 0, $numOfCards);
     }
+
     public function drawCard(): ?Card
     {
         return array_shift($this->cards);

@@ -10,10 +10,11 @@ class CardHand
     public function drawCard(DeckOfCards $deck): void
     {
         $card = $deck->drawCard();
-        if ($card !== null) {
+        if (null !== $card) {
             $this->hand[] = $card;
         }
     }
+
     /** @return Card[] */
     public function showHand(): array
     {
@@ -25,6 +26,7 @@ class CardHand
         if (!empty($this->hand)) {
             return end($this->hand);
         }
+
         return null;
     }
 
@@ -32,18 +34,17 @@ class CardHand
     {
         $cardsValue = [
             'KN' => 10,
-            'D'  => 10,
-            'K'  => 10,
-            'A'  => 11
+            'D' => 10,
+            'K' => 10,
+            'A' => 11,
         ];
 
         $result = 0;
 
         foreach ($this->hand as $card) {
-            $result += $cardsValue[$card->rank] ?? (int)$card->rank;
+            $result += $cardsValue[$card->rank] ?? (int) $card->rank;
         }
 
         return $result;
     }
-
 }

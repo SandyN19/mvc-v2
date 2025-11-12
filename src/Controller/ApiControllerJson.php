@@ -2,48 +2,46 @@
 
 namespace App\Controller;
 
-use App\Card\Card;
-use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use App\Repository\BooksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\BooksRepository;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ApiControllerJson extends AbstractController
 {
-    #[Route("/api/json", name: "api_start_json")]
+    #[Route('/api/json', name: 'api_start_json')]
     public function jsonStart(): Response
     {
         $routes = [
-           '/quote' => 'Get a random quote',
-           '/deck' => 'Get a deck of cards',
+            '/quote' => 'Get a random quote',
+            '/deck' => 'Get a deck of cards',
             '/deck/shuffle' => 'Shuffle deck',
             '/deck/draw' => 'Draw a card from deck',
             '/deck/draw/{num}' => 'Draw multiple cards from deck',
             '/game' => 'Get game status',
         ];
 
-        //return new JsonResponse($data);
+        // return new JsonResponse($data);
         $response = new JsonResponse($routes);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
         return $response;
     }
-    #[Route("/api/quote", name: "api_quote")]
+
+    #[Route('/api/quote', name: 'api_quote')]
     public function jsonQuote(): Response
     {
-
         $quotes = [
             'Be yourself; everyone else is already taken. - Oscar Wilde',
             'So many books, so little time. - Frank Zappa',
-            "Two things are infinite: the universe and human stupidity; and Im not sure about the universe. - Albert Einstein",
-            "Im selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you cant handle me at my worst, then you sure as hell dont deserve me at my best. - Marilyn Monroe"
+            'Two things are infinite: the universe and human stupidity; and Im not sure about the universe. - Albert Einstein',
+            'Im selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you cant handle me at my worst, then you sure as hell dont deserve me at my best. - Marilyn Monroe',
         ];
 
         $data = [
@@ -51,74 +49,78 @@ class ApiControllerJson extends AbstractController
             'random-quote' => $quotes[array_rand($quotes)],
         ];
 
-        //return new JsonResponse($data);
+        // return new JsonResponse($data);
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
         return $response;
     }
-    #[Route("/api/deck", name: "api_deck")]
+
+    #[Route('/api/deck', name: 'api_deck')]
     public function jsonDeck(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
-
         }
-    /** @var DeckOfCards $deck */
-    $deck = $session->get('deck');
+        /** @var DeckOfCards $deck */
+        $deck = $session->get('deck');
 
-        //return new JsonResponse($data);
+        // return new JsonResponse($data);
         $response = new JsonResponse($deck->getCards());
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+
         return $response;
     }
-    #[Route("/api/deck/shuffle", name: "api_deck_shuffle")]
+
+    #[Route('/api/deck/shuffle', name: 'api_deck_shuffle')]
     public function jsonDeckShuffle(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
 
-
-        //return new JsonResponse($data);
+        // return new JsonResponse($data);
         $response = new JsonResponse($deck->getCards());
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+
         return $response;
     }
-    #[Route("/api/deck/draw", name: "api_deck_draw")]
+
+    #[Route('/api/deck/draw', name: 'api_deck_draw')]
     public function jsonDeckDraw(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
             $deck = new DeckOfCards();
             $session->set('deck', $deck);
-
         }
-    /** @var DeckOfCards $deck */
-    $deck = $session->get('deck');
-
+        /** @var DeckOfCards $deck */
+        $deck = $session->get('deck');
 
         $data = [
-            "card" => $deck->drawCard(),
-            "length" => count($deck->getCards()),
+            'card' => $deck->drawCard(),
+            'length' => count($deck->getCards()),
         ];
 
-        //return new JsonResponse($data);
+        // return new JsonResponse($data);
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+
         return $response;
     }
-    #[Route("/api/deck/draw/{num<\d+>}", name: "api_deck_draw_many")]
+
+    #[Route("/api/deck/draw/{num<\d+>}", name: 'api_deck_draw_many')]
     public function jsonDeckDrawMany(
         int $num,
-        SessionInterface $session
+        SessionInterface $session,
     ): Response {
         if ($num > 52) {
             throw new \Exception("Can't draw more than 52 cards!");
@@ -128,32 +130,33 @@ class ApiControllerJson extends AbstractController
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-    /** @var DeckOfCards $deck */
-    $deck = $session->get('deck');
+        /** @var DeckOfCards $deck */
+        $deck = $session->get('deck');
         $cardsDrawn = [];
-        for ($i = 1; $i <= $num; $i++) {
+        for ($i = 1; $i <= $num; ++$i) {
             $cardsDrawn[] = $deck->drawCard();
             $session->set('deck', $deck);
         }
 
-        $session->set('deck', ($deck));
+        $session->set('deck', $deck);
         $lastCard = end($cardsDrawn);
         $session->set('last_card', $lastCard);
         $cardsLeft = count($deck->getCards());
 
-
         $data = [
-            "cards" => $cardsDrawn,
-            "length" => count($cardsDrawn),
-            "cards_left" => $cardsLeft,
+            'cards' => $cardsDrawn,
+            'length' => count($cardsDrawn),
+            'cards_left' => $cardsLeft,
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+
         return $response;
     }
-    #[Route("/api/game", name: "api_game")]
+
+    #[Route('/api/game', name: 'api_game')]
     public function gameStatus(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
@@ -172,12 +175,12 @@ class ApiControllerJson extends AbstractController
             $session->set('dealerHand', $dealerHand);
         }
 
-    /** @var DeckOfCards $deck */
-    $deck = $session->get('deck');
-    /** @var CardHand $playerHand */
-    $playerHand = $session->get('playerHand');
-    /** @var CardHand $dealerHand */
-    $dealerHand = $session->get('dealerHand');
+        /** @var DeckOfCards $deck */
+        $deck = $session->get('deck');
+        /** @var CardHand $playerHand */
+        $playerHand = $session->get('playerHand');
+        /** @var CardHand $dealerHand */
+        $dealerHand = $session->get('dealerHand');
 
         $data = [
             'playerHand' => $playerHand->showHand(),
@@ -188,11 +191,13 @@ class ApiControllerJson extends AbstractController
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT  | JSON_UNESCAPED_UNICODE
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+
         return $response;
     }
-    #[Route("/api/libary/books", name: "api_libary_books")]
+
+    #[Route('/api/libary/books', name: 'api_libary_books')]
     public function books(BooksRepository $BooksRepository): Response
     {
         $books = $BooksRepository
@@ -213,18 +218,20 @@ class ApiControllerJson extends AbstractController
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
         return $response;
     }
-    #[Route("/api/libary/book/{isbn}", name: "api_libary_books_isbn")]
+
+    #[Route('/api/libary/book/{isbn}', name: 'api_libary_books_isbn')]
     public function booksByIsbn(BooksRepository $BooksRepository, string $isbn): Response
     {
         $book = $BooksRepository->findOneBy(['isbn' => $isbn]);
 
         if (!$book) {
-        return new JsonResponse([
-            'error' => "No book found with isbn: $isbn"
-        ], 404);
-    }
+            return new JsonResponse([
+                'error' => "No book found with isbn: $isbn",
+            ], 404);
+        }
 
         $data = [
             'id' => $book->getId(),
@@ -234,11 +241,11 @@ class ApiControllerJson extends AbstractController
             'img' => $book->getImg(),
         ];
 
-    $response = new JsonResponse($data);
+        $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
         return $response;
     }
-    
 }
