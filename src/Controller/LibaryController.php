@@ -26,12 +26,6 @@ final class LibaryController extends AbstractController
         return $this->render('libary/index.html.twig', $data);
     }
 
-    #[Route('/libary/form', name: 'libary_form')]
-    public function showForm(): Response
-    {
-        return $this->render('libary/form.html.twig');
-    }
-
     #[Route('/libary/add', name: 'libary_add', methods: ['POST'])]
     public function addBook(
         ManagerRegistry $doctrine,
@@ -82,21 +76,6 @@ final class LibaryController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('libary');
-    }
-
-    #[Route('/libary/updateForm/{id}', name: 'libary_update_one_form')]
-    public function showUpdateForm(
-        BooksRepository $BooksRepository,
-        int $id,
-    ): Response {
-        $book = $BooksRepository
-            ->find($id);
-
-        $data = [
-            'book' => $book,
-        ];
-
-        return $this->render('libary/update.html.twig', $data);
     }
 
     #[Route('/libary/update/{id}', name: 'libary_update_one', methods: ['POST'])]
