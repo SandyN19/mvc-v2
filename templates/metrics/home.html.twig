@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Metrics</h1>
+        <h2>Introduktion</h2>
+        <p> De sex C:na är Codestyle, Coverage, Complexity, Cohesion, Coupling och CRAP </p>
+        <h3>Codestyle</h3>
+        <p>Codestyle handlar om att skriva kod på ett konsekvent och läsbart sätt. Det brukar finnas standarder eller riktlinjer man kan följa. 
+        Tillexempel är föredrars det att använda engelska som språk. I detta fall finns det i composer som vi har jobbat med och det är csfix. csfix står för 
+        code standard fixer. Det är ett supersmidigt verktyg som inte bara hittar kodsnuttar i min kod som inte följer standarden utan den fixar dem också! </p>
+        <h3>Coverage</h3>
+        <p>Coverage handlar om kodtäckning av testerna. Det är alltså bra att ha en hög kodsträckning då det visar att testerna testar en stor del av koden och man 
+        kan då vara säker på att koden man har skrivit fungerar. Om testerna går igenom. Oftas vill man sikta på en kodtäckning mellan 70% - 100%. I kursmoment 4 skulle vi testa 
+        card kontrollerna. Jag skrev unittester som testade funktionerna och fick en kodtäckning på 100%.</p>
+        <h3>Complexity</h3>
+        <p>Complexity handlar om hur komplex koden är. Oftas vill man ha så låg komplexitet som möjligt för att göra koden mer lättläst och lättare att felsöka. Det vi brukar göra 
+        är att dela upp koden i flera filer så att filerna blir mindre. Det kan också handla om hur man skriver funktioner. Tillexempel är nestade looper eller if-satser svårlästa och om det går vill man 
+        helst undvika dem. Det kan påverka kodkvaliteten negativt om det tillexempel inte följer standarden.</p>
+        <h3>Cohesion</h3>
+        <p>Cohesion handlar om hur väl olika element inom en modul jobbar ihop för att uppå ett syfte. Hög Cohesion betyer att element är starkt relaterade och är fokuserade på en ett enda syfte och 
+        låg Cohesion betyer att elementen är svagt relaterade och har flera olika syften. Det blir lite svårläst och svårt att förstå vad modulen gör om det är låg Cohesion. Exemeplvis är väl detta projekt
+         där vi har delat upp Cardmodulerna för sig och såvidare. Det är lätt att förstå och söka sig igenom Card om det det behövs. Däremot om några card-funktioner låg i libary så hade det varit lite svårt att 
+         felska om det hade blivit lite knasigt.</p>
+        <h3>Coupling</h3>
+        <p>Coupling handlar om beroenden mellan olika moduler. Hög coupling innebr att modulerna är nära kopplade till varandra och förändringar i en modul kan påverka andra moduler. Låg coupling innebär att modulera är 
+        självstädiga och förändingar i en modul påvkerar andar moduler ytters lite eller inte alls. Coupling och Cohesion hänger lite ihop. Hög coupling och låg cohesion gör ett system svårtestat och det blit svårt att ändra i koden. 
+        Medan hög cohesion och låg coupling gör koden mer lättläst och lättare att utveckla.</p>
+        <h3>CRAP</h3>
+        <p>CRAP står för Change Risk Anti-Patterns och är ett mått för kod som är svårt att ändra för att den är så pass komplex har låg kodtäckning. Här vill man helst ha ett lågt CRAP-värde då det innebär att koden är enkel och bra testat. Får man 
+        däremot ett högt värde så tyder det att koden är svår och dåligt testat och det kan därför vara svårt att göra ändingar i koden.
+        <h2>Phpmetrics</h2>
+        <p>Enligt phpmeteris har jag 5 violations, 660 kodliner, 16 klasses, 3,06 i genomsnitt i cyclomatic complexity, 21 assertions i tester och i sitt 0.11 buggar. Kollar man på maintalibiy/complexity cirklarna så är det ganska många gröna men det är en hel del röda och några gula cokså. 
+        Exemeplvis ApiController som har den största röda cirklen, cyclomatic complexity på 11 och maintability index på 57.58. Går man in lite djupare så avslöjar phpmetrics också en hel del filer som inte är testade. Det finns en del förbättringar jag kan göra i denna kod men det ser inte katastrofalt ut iallfall :D</p>
+        <p>En svagpunkt med min kod är filen libarycontroller. Den har en cyclomatic Complexity på 3 och en maintability index på 63,68. Detta tror jag kan förbättras och hoppas på att det inte blir allt för knasigt att göra några ändringar.</p>
+        <img src="/img/main.png" alt="maintainability Screenshot" width="500" height="300">
+        <p> En annan svagpunk är att filen apicontrollerjson inte blir testad av unitteser och den har ett ganska högt cyclomatic complexity på 11 samt att det är 0.65 bugs enlligt Phpmetrics.</p>
+        <img src="/img/test.png" alt="test Screenshot" width="500" height="300">
+        <p> Sista svagpunktion i min kod som jag tar upp är att jag har 5 violation varar 1 är ett error.</p>
+        <img src="/img/vio.png" alt="violations Screenshot" width="500" height="300">
+        <h2>Scrutinizer</h2>
+        <img src="/img/scru.png" alt="Scrutinizer Screenshot" width="500" height="300">
+        <p> Enligt Scrutinizer så har jag ett värde  på 9.94 och  det står very good. Det här är jag nöjd med. Dock står det att det finns 3 issues. En av dem är src/Kernel.php och denna fil har jag inget minne av att jag sjäv har skrivit, jag kommer förmodligen inte röra den då. De två andra filerna apicontrollerjson och gamecontroller står det "unused code"." Dessa kan jag 
+        gå in och ändra i och det kommer jag nog att göra. Det verkar inte heller vara super krånliga ändringar. Coveragen är dock låg men det är för jag inte har skrivit så många tester.
+        <img src="https://scrutinizer-ci.com/g/SandyN19/mvc-v2/badges/quality-score.png?b=main">
+        <img src="https://scrutinizer-ci.com/g/SandyN19/mvc-v2/badges/coverage.png?b=main"></p>
+        <h2>Förbättringar</h2>
+        <p> Som nämn ovan så vill jag förbättra de tre problemen jag hittade. Jag vill minska komplexiteten i libarycontroller, målet är att den röda cirklen att bli grön. jag tror jag vill försöka fördela upp filen så att den kanske blir mindre och därmed minskad komplexitet. Jag vill också skriva unittester för för filen apicontrollerjson. Sedan vill jag fixa de violations jag fick, så först ska jag läsa mig på vad det är för violations och errors jag får och sedan försöka fixa dem.
+         Förhoppningsvis kommer dessa förbättringar öka min kodkvalitet.
+    </div>
+{% endblock %}
