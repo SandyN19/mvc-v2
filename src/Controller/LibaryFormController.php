@@ -12,6 +12,25 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LibaryFormController extends AbstractController
 {
+    #[Route('/libary', name: 'libary')]
+    public function showAllBooks(
+        BooksRepository $BooksRepository,
+    ): Response {
+        return $this->render('libary/index.html.twig', [
+        'books' => $BooksRepository->findAll()
+    ]);
+    }
+
+    #[Route('/libary/show/{id}', name: 'libary_show_one')]
+    public function showOneBook(
+        BooksRepository $BooksRepository,
+        int $id,
+    ): Response {
+        return $this->render('libary/book.html.twig', [
+        'book' => $BooksRepository->find($id)
+    ]);
+    }
+
 
     #[Route('/libary/form', name: 'libary_form')]
     public function showForm(): Response
@@ -24,14 +43,9 @@ final class LibaryFormController extends AbstractController
         BooksRepository $BooksRepository,
         int $id,
     ): Response {
-        $book = $BooksRepository
-            ->find($id);
-
-        $data = [
-            'book' => $book,
-        ];
-
-        return $this->render('libary/update.html.twig', $data);
+        return $this->render('libary/update.html.twig', [
+        'book' => $BooksRepository->find($id)
+    ]);
     }
 
 }

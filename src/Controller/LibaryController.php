@@ -12,20 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LibaryController extends AbstractController
 {
-    #[Route('/libary', name: 'libary')]
-    public function showAllBooks(
-        BooksRepository $BooksRepository,
-    ): Response {
-        $books = $BooksRepository
-            ->findAll();
-
-        $data = [
-            'books' => $books,
-        ];
-
-        return $this->render('libary/index.html.twig', $data);
-    }
-
     #[Route('/libary/add', name: 'libary_add', methods: ['POST'])]
     public function addBook(
         ManagerRegistry $doctrine,
@@ -34,10 +20,7 @@ final class LibaryController extends AbstractController
         $entityManager = $doctrine->getManager();
         $book = new Books();
 
-        $book->setTitle((string) $request->request->get('title'));
-        $book->setAuthor((string) $request->request->get('author'));
-        $book->setIsbn((string) $request->request->get('isbn'));
-        $book->setImg((string) $request->request->get('img'));
+        $this->formFields($request, $book);
 
         $entityManager->persist($book);
         $entityManager->flush();
@@ -45,20 +28,6 @@ final class LibaryController extends AbstractController
         return $this->redirectToRoute('libary');
     }
 
-    #[Route('/libary/show/{id}', name: 'libary_show_one')]
-    public function showOneBook(
-        BooksRepository $BooksRepository,
-        int $id,
-    ): Response {
-        $book = $BooksRepository
-            ->find($id);
-
-        $data = [
-            'book' => $book,
-        ];
-
-        return $this->render('libary/book.html.twig', $data);
-    }
 
     #[Route('/libary/delete/{id}', name: 'libary_delete_one', methods: ['POST'])]
     public function deleteOneBook(
@@ -89,13 +58,17 @@ final class LibaryController extends AbstractController
         if (!$book) {
             throw $this->createNotFoundException('No book found for id '.$id);
         }
-        $book->setTitle((string) $request->request->get('title'));
-        $book->setAuthor((string) $request->request->get('author'));
-        $book->setIsbn((string) $request->request->get('isbn'));
-        $book->setImg((string) $request->request->get('img'));
+        $this->formFields($request, $book);
 
         $entityManager->flush();
 
         return $this->redirectToRoute('libary');
+    }
+    private function formFields(Request $request, Books $book): void
+    {
+        $book->setTitle((string) $request->request->get('title'));
+        $book->setAuthor((string) $request->request->get('author'));
+        $book->setIsbn((string) $request->request->get('isbn'));
+        $book->setImg((string) $request->request->get('img'));
     }
 }
