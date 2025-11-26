@@ -48,6 +48,16 @@
         <img src="https://scrutinizer-ci.com/g/SandyN19/mvc-v2/badges/coverage.png?b=main"></p>
         <h2>Förbättringar</h2>
         <p> Som nämn ovan så vill jag förbättra de tre problemen jag hittade. Jag vill minska komplexiteten i libarycontroller, målet är att den röda cirklen att bli grön. jag tror jag vill försöka fördela upp filen så att den kanske blir mindre och därmed minskad komplexitet. Jag vill också skriva unittester för för filen apicontrollerjson. Sedan vill jag fixa de violations jag fick, så först ska jag läsa mig på vad det är för violations och errors jag får och sedan försöka fixa dem.
-         Förhoppningsvis kommer dessa förbättringar öka min kodkvalitet.
+         Förhoppningsvis kommer dessa förbättringar öka min kodkvalitet.</p>
+         <p> Det var ganska många filer jag delade upp för att förbättra maintability och complexity. Det resutlerade i fler cirklar som vi kan se på bilden nedan. jag gick från flera stora röda cirklar till en röd och flera gula. Jag tyckte också det var svårt att förbättra maintability indexen. Jag fick förbättrningar men det var bara några procent. Men det är ändå en förbättring och jag är ändå rätt nöjd med det, det är rätt låg com complexity nu, det är maintability indexen isåfall som kan förbättras lite till kanske.</p> 
+        <img src="/img/new.png" alt="maintainability Screenshot" width="500" height="300">
+        <p> I och med att jag delade upp rätt många filer så och apicontrollerjson är bland dem så minskade cyclomatic complexityen där och maintability indexen ökade.</p>
+        <img src="/img/newtest.png" alt="maintainability Screenshot" width="500" height="300">
+        <p> Jag lyckades lösa mina violations. Jag hade 5 tycken innan och även detta problem löstes när jag började dela upp filerna. Jag läste om "god" fil/object vilket innebar att det var för många funnktioner i filen så det gick snabbt att åtgärda. Sedan var det lite buggar som försvann också vid uppdelningen. Det jag inte kunde lösa var det package felen som är kvar. Jag har heller ingen aning om hur man kan lösa dem. Jag är ändå nöjd med detta då jag fick bort den erroret jag hade.</p>
+        <img src="/img/newvio.png" alt="maintainability Screenshot" width="500" height="300">
+        <h2>Diskussion</h2>
+        <p> Ja, jag tycker att det går att arbeta aktivt på detta sätt med kodkvatitet och clean code. Jag tycker att det är bra C som man kan tänka på. Det burkar ju oftast vara så att om man tänker på det redan från början eller har vanorna så går dessa problem att undvikas eftersom man aktivt tänker på dem då. Jag tycker att en fördel är att man får så mycket information om sin kod från phpmetrics, scrutinizer och de andra verktygn vi har jobbat med. 
+        Phpmetrics gav hur mycket informaation som helst! Violations, vilka filer man inte testar och cyclomatic complexity bara för att nämna några. Jag tycker också att det är så smidigt att scrutinizer är kopplat till github och att man kan se sånna badges. Nackdel med scrutinizer kan vara att den var så slö första gången jag körde den. Det tog mig väldigt lång tid att får ett resultat första gången. Annars tycker jag att båda är ett väldig bra verktyg och det var 
+        smidigt att komma igång med dem!</p>
     </div>
 {% endblock %}
