@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/minion.png') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body class="proj-body">
+    <header class="site-header">
+        <span class="site-title">Sang22 BlackJack Mega Win</span>
+    </header>
+    <hr>
+    {% block body %}{% endblock %}
+    <footer class="proj-footer">
+        <p> Spela ansvarsfullt.</p>
+        <p>&copy; 2025 Sandy Nguyen - sang22@student.bth.se</p>
+    </footer>
+</body>
+</html>

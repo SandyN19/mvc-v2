@@ -1,0 +1,70 @@
+{% extends "proj_base.html.twig" %}
+
+{% block body %}
+
+<div class="game-container">
+    <p>Bank: {{ bank }} kr</p>
+    <p>Bet per hand: {{ bet }} kr</p>
+    <div class="dealer-section">
+        <h2>Dealer</h2>
+
+        <div class="card-hands-container">
+            {% set firstCard = dealerHand[0] %}
+            <div class="card">{{ firstCard.getAsString() }}</div>
+
+            {% if not gameOver %}
+                <div class="card back">🂠</div>
+            {% endif %}
+
+            {% if gameOver %}
+                {% for card in dealerHand|slice(1) %}
+                    <div class="card">{{ card.getAsString() }}</div>
+                {% endfor %}
+                <h2 class="dealer-value">{{ dealerHandValue }}</h2>
+            {% endif %}
+        </div>
+        
+    </div>
+    <h2>{{ username }}'s hand</h2>
+    <div class="player-section">
+
+        {% for hand in playerHands %}
+            <div class="hand-block {% if loop.index0 == currentHand and not gameOver %}active-hand{% endif %}">
+                <h3>Hand {{ loop.index }} ({{ hand.getHandValue() }})</h3>
+
+                <div class="card-hands-container">
+                    {% for card in hand.showHand() %}
+                        <div class="card">{{ card.getAsString() }}</div>
+                    {% endfor %}
+                </div>
+
+                {% if loop.index0 == currentHand and not gameOver %}
+                    <form method="post" action="{{ path('project_hit', { index: loop.index0 }) }}">
+                        <button class="action-btn">Hit</button>
+                    </form>
+
+                    <form method="post" action="{{ path('project_stand') }}">
+                        <button class="action-btn">Stand</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if gameOver %}
+        <div class="result-section">
+            <h2>Result:</h2>
+            <ul class="result-list">
+                {% for line in result %}
+                    <li>{{ line }}</li>
+                {% endfor %}
+            </ul>
+            <form method="post" action="{{ path('project_restart') }}">
+                <button class="restart-btn">play again</button>
+            </form>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

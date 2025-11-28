@@ -1,0 +1,23 @@
+{% extends "proj_base.html.twig" %}
+
+{% block title %}Doc{% endblock %}
+
+{% block body %}
+<h1>Doc</h1>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ path('project_start') }}">Hem</a></li>
+        </ul>
+    </nav>
+<p>Black Jack är ett amerikanskt hasardspel som liknar Baccarat. En svensk variant av Black Jack är tjugoett. Black Jack förekommer ofta på kasinon. </p>
+<p> Spelet går ut på att komma så nära 21 som möjligt utan att bli "tjock" (över 21). Man måste också få bättre kort än dealern. 
+Om både spelare och dealer har 17, 18, 19, 20 eller 21 så blir det "push", det innebär att spelare får tillbaka sin insats.</p>
+<p>Efter att dealern har gett ut två öppna kort till varje spelare samt ett kort till sig själv så får spelarna nu välja om de vill ha fler kort eller stanna. 
+När spelarna valt klart drar dealern kort. Dealern måste stanna på 17 eller bättre och ta kort om det är under 17.</p>
+<div class="img-container">
+    <img src="{{ asset('img/blackjackFC.png') }}" alt="Flowchart Blackjack" class="game-img">
+    <img src="{{ asset('img/blackjackPC.png') }}" alt="Blackjack pseudo code" class="game-img">
+</div>
+<p> Detta projekt blir en fortsättning på föregående kursmoment där jag lägger till några funktionaliteter såsom att kunna spela flera händer, en bank funktion samt ett bet-system. Tanken är att man får börja med 1000 kr och sendan får man välja hur mycket man vill 
+satsa per hand (5kr, 10kr, 50kr & 100kr).
+{% endblock %}

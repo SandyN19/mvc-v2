@@ -1,0 +1,14 @@
+{% extends "proj_base.html.twig" %}
+
+{% block title %}BlackJack Game{% endblock %}
+
+{% block body %}
+<div class="game-menu">
+    <h1>BlackJack Game</h1>
+
+    <ul>
+        <li><a href="{{ path('project_init_get') }}">Play BlackJack</a></li>
+        <li><a href="{{ path('project_about') }}">Read about this BlackJack project</a></li>
+    </ul>
+</div>
+{% endblock %}

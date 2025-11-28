@@ -1,0 +1,28 @@
+{% extends "proj_base.html.twig" %}
+
+{% block body %}
+
+
+<form method="post" action="" class="blackjack-form">
+    <h1>BlackJack [START]</h1>
+    <label>username:</label>
+    <input type="text" name="username" required>
+
+    <label>Amount of hands:</label>
+    <select name="handCount">
+        <option value="1">1 hand</option>
+        <option value="2">2 hands</option>
+        <option value="3">3 hands</option>
+    </select>
+
+    <label>bet amount:</label>
+    <select name="bet">
+        <option value="5">5 kr</option>
+        <option value="10">10 kr</option>
+        <option value="50">50 kr</option>
+        <option value="100">100 kr</option>
+    </select>
+    <input type="submit" name="do_it" value="Start playing">
+</form>
+
+{% endblock %}
