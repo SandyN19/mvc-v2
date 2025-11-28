@@ -1,0 +1,145 @@
+.proj-navbar{
+    background-color: red;
+}
+.proj-body{
+    background-color: #ECEDB0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.proj-body .site-header {
+    background-color: #F68537;
+    text-align: center;
+}
+.game-menu {
+    text-align: center;
+}
+
+.game-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.game-menu li {
+    margin: 10px 0;
+    font-size: 20px;
+    background-color: #EAD8A4;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    width: 250px;
+}
+
+.game-menu li:hover{
+    background-color: #F68537;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.game-menu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+}
+.blackjack-form {
+    gap: 10px;
+}
+.blackjack-form label {
+    font-size: 18px;
+}
+
+
+.blackjack-form input[type="submit"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #EAD8A4;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+.blackjack-form input[type="submit"]:hover {
+    background-color: #F68537;
+}
+
+.game-container {
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.player-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.hand-block {
+    background-color: #FAF6D6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.hand-block.active-hand {
+    background-color: #FFE7B8;
+    border: 2px solid #F68537;
+}
+
+.card-hands-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    flex-wrap: nowrap;
+}
+.card {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px 15px;
+    border-radius: 6px;
+    min-width: 40px;
+}
+
+.card.back {
+    background-color: transparent;
+    border: none;
+    font-size: 4rem;
+}
+
+
+.action-btn,
+.restart-btn {
+    background-color: #EAD8A4;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.action-btn:hover,
+.restart-btn:hover {
+    background-color: #F68537;
+}
+
+.result-section {
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px;
+    background-color: #FFF1C4;
+    border-radius: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+}
+.result-section .result-list {
+    display: inline-block;
+}
+
+.proj-footer{
+    background-color: #D6D85D;
+}
