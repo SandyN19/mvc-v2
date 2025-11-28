@@ -371,6 +371,71 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-PageControllerTwig.html#method_report"
         },                {
+            "fqsen": "\\App\\Controller\\ProjController",
+            "name": "ProjController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjController\u003A\u003AprojHome\u0028\u0029",
+            "name": "projHome",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html#method_projHome"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjController\u003A\u003Ainit\u0028\u0029",
+            "name": "init",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html#method_init"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjController\u003A\u003AinitCallback\u0028\u0029",
+            "name": "initCallback",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html#method_initCallback"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjController\u003A\u003Adoc\u0028\u0029",
+            "name": "doc",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html#method_doc"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjDealerController",
+            "name": "ProjDealerController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjDealerController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjDealerController\u003A\u003Adealer\u0028\u0029",
+            "name": "dealer",
+            "summary": "",
+            "url": "classes/App-Controller-ProjDealerController.html#method_dealer"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjGameController",
+            "name": "ProjGameController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjGameController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjGameController\u003A\u003Aplay\u0028\u0029",
+            "name": "play",
+            "summary": "",
+            "url": "classes/App-Controller-ProjGameController.html#method_play"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjGameController\u003A\u003Arestart\u0028\u0029",
+            "name": "restart",
+            "summary": "",
+            "url": "classes/App-Controller-ProjGameController.html#method_restart"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjPlayerController",
+            "name": "ProjPlayerController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjPlayerController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjPlayerController\u003A\u003Ahit\u0028\u0029",
+            "name": "hit",
+            "summary": "",
+            "url": "classes/App-Controller-ProjPlayerController.html#method_hit"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjPlayerController\u003A\u003Astand\u0028\u0029",
+            "name": "stand",
+            "summary": "",
+            "url": "classes/App-Controller-ProjPlayerController.html#method_stand"
+        },                {
             "fqsen": "\\App\\Controller\\SessionController",
             "name": "SessionController",
             "summary": "",
